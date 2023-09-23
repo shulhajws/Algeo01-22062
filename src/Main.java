@@ -4,7 +4,9 @@ public class Main {
         System.out.print("Selamat Datang di Program Matriks!\n");
         
         System.out.print("Isikan Matriks!\n");
-        M1.ReadMatriks(2,2);
-        M1.DisplayMatriks(2,2);
+        M1.readMatriks(2,2);
+        M1.displayMatriks(2,2);
+        boolean identity = M1.isIdentity();
+        System.out.print(identity);
     }
 }
