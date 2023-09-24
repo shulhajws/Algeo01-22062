@@ -50,7 +50,7 @@ public class AljabarLinear {
                 convertZero(x, rx, i);
             }
             r = findFirstOne(m, c);
-            c++; r++;1`1121
+            c++; r++;
         }
     }
 }
