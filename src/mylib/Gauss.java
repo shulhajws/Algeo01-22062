@@ -3,6 +3,40 @@ package mylib;
 // import Matriks.*;
 
 public class Gauss {
+
+    /** Cek apakah matriks merupakan matriks eselon baris */
+    public boolean isEselonBaris(Matriks M){
+        // jika 0 semua diterima
+        // loop setiap baris hingga bukan 0 pertama, jika bukan 0 pertama, jika bukan 1 maka salah
+        // jika 1, maka cek apakah 1 berada di kolom yang lebih kanan dari 1 pada baris sebelumnya
+        // jika tidak lebih kanan maka salah
+
+        int i,j, prevLeadingOne = -1;
+        for(i=0;i<M.nRows;i++){
+            for(j=0;j<M.nCols;j++){
+                if(M.Matriks[i][j]!=0){
+                    if(i!=0 && !isRowAllZero(M,i-1)){
+                        return false;
+                    }
+                    if(M.Matriks[i][j]!=1){
+                        return false;
+                    } else {
+                        if(j<=prevLeadingOne){
+                            return false;
+                        } else {
+                            prevLeadingOne = j;
+                        }
+                    }
+                    break;
+                } else {
+                    continue;
+                }
+            }
+        }
+        return true;       
+    }
+
+    
     public void convertOne(double x, int r, Matriks m){
         for(int c = 0; c < m.nCols; c++){
             m.Matriks[r][c] = m.Matriks[r][c] / x;

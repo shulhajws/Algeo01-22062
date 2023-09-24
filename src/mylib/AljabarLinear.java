@@ -1,5 +1,4 @@
 package mylib;
-// import mylib.Matriks;
 
 public class AljabarLinear {
     public double cofactor(Matriks M, int r, int k){
@@ -36,21 +35,21 @@ public class AljabarLinear {
     }
 
     public static void Gauss(Matriks m){
+        Gauss n = new Gauss();
         int r = 0; int c = 0;
-        while (!gauss && c < m.nCols){
+        while (!n.isEselonBaris(m) && c < m.nCols){
             if (m.Matriks[r][c] != 1){
                 double x = m.Matriks[r][c];
-                convertOne(x, r, m); 
+                n.convertOne(x, r, m); 
             } else {
                 continue;
             }
             for(int i = r + 1; r < m.nRows; r++){
                 double x = m.Matriks[r][c];
-                int rx = findFirstOne(m, c);
-                convertZero(x, rx, i);
+                int rx = n.findFirstOne(m, c);
+                n.convertZero(x, rx, i,m);
             }
-            r = findFirstOne(m, c);
-            c++; r++;1`1121
-        }
+            r = n.findFirstOne(m, c);
+            c++;        }
     }
 }
