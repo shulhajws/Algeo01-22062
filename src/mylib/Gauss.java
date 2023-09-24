@@ -72,4 +72,14 @@ public class Gauss {
         }
         return yes;
     }
+
+    public void swapRow(Matriks m, int r1, int r2){
+        double temp = 0;
+        for(int c = 0; c < m.nCols; c++){
+            temp = m.Matriks[r1][c];
+            m.Matriks[r1][c] = m.Matriks[r2][c];
+            m.Matriks[r2][c] = m.Matriks[r1][c];
+        }
+    }
 }
+

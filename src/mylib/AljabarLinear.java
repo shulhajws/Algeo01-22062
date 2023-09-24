@@ -50,6 +50,7 @@ public class AljabarLinear {
                 n.convertZero(x, rx, i,m);
             }
             r = n.findFirstOne(m, c);
-            c++;        }
+            c++; r++;
+        }
     }
 }
