@@ -34,18 +34,18 @@ public class AljabarLinear {
         }
     }
 
-    public static void Gauss(Matriks m){
+    public void Gauss(Matriks m){
         Gauss n = new Gauss();
         int r = 0; int c = 0;
         while (!n.isEselonBaris(m) && c < m.nCols){
+            System.out.println(r + " " + c);
             if (m.Matriks[r][c] != 1){
                 double x = m.Matriks[r][c];
-                n.convertOne(x, r, m); 
-            } else {
-                continue;
+                n.convertOne(x, r, m);
             }
             for(int i = r + 1; r < m.nRows; r++){
                 double x = m.Matriks[r][c];
+                System.out.println(r + " " + c);
                 int rx = n.findFirstOne(m, c);
                 n.convertZero(x, rx, i,m);
             }
