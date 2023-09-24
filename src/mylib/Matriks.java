@@ -1,4 +1,6 @@
+package mylib;
 import java.util.Scanner;
+// import mylib.AljabarLinear;
 
 public class Matriks {
     //Atribut
@@ -15,6 +17,11 @@ public class Matriks {
     }
 
     //Baca Matriks
+    /**
+     * Membaca matriks dari input user
+     * @param nRows
+     * @param nCols
+     */
     public void readMatriks(int nRows, int nCols){
         Scanner in = new Scanner(System.in);
 
@@ -27,36 +34,64 @@ public class Matriks {
     }
 
     //Tulis Matriks
-    public void displayMatriks(int nRows, int nCols){
+    /**
+     * Menampilkan matriks ke layar
+     */
+    public void displayMatriks(){
         int i,j;
-        for(i=0;i<nRows;i++){
-            for(j=0;j<nCols;j++){
+        for(i=0;i<this.nRows;i++){
+            for(j=0;j<this.nCols;j++){
                 System.out.print(this.Matriks[i][j] + " ");
             }
             System.out.println();
         }
     }
 
+    /**
+     * Mengembalikan true jika indeks matriks valid (kurang dari kapasitas maksimum matriks 1000)
+     * @param i
+     * @param j
+     * @return
+     */
     public boolean isMatrixIdxValid(int i, int j){
         return (i>=0 && i<1000 && j>=0 && j<1000);
     } 
 
+    /**
+     * Mengembalikan true jika indeks matriks efektif (kurang dari ukuran matriks)
+     */
     public boolean isMatrixIdxEff(int i, int j){
         return (i>=0 && i<this.nRows && j>=0 && j<this.nCols);
     }
 
+    //Getter
+    /**
+     * Mengembalikan indeks baris terakhir matriks
+     * @return
+     */
     public int getLastIdxRow(){
         return this.nRows-1;
     }
 
+    /**
+     * Mengembalikan indeks kolom terakhir matriks
+     * @return
+     */
     public int getLastIdxCol(){
         return this.nCols-1;
     }
 
+    /**
+     * Mengembalikan nilai dari indeks matriks yang diagonal
+     * @return
+     */
     public int getElmtDiagonal(int i){
         return this.Matriks[i][i];
     }
 
+    /**
+     * Membuat salinan dari matriks
+     */
     public void copyMatriks(){
         Matriks MCopy = new Matriks(this.nRows, this.nCols);
         int i,j;
@@ -67,6 +102,12 @@ public class Matriks {
         }
     }
 
+    //Operasi Matriks
+    /**
+     * Mengembalikan matriks hasil penjumlahan matriks dengan matriks M2
+     * @param M2
+     * @return
+     */
     public Matriks addMatriks(Matriks M2){
         Matriks MCopy = new Matriks(this.nRows, this.nCols);
         int i,j;
@@ -78,6 +119,11 @@ public class Matriks {
         return MCopy;
     }
 
+    /**
+     * Mengembalikan matriks hasil pengurangan matriks dengan matriks M2
+     * @param M2
+     * @return
+     */
     public Matriks subMatriks(Matriks M2){
         Matriks MCopy = new Matriks(this.nRows, this.nCols);
         int i,j;
@@ -89,6 +135,9 @@ public class Matriks {
         return MCopy;
     }
 
+    /*
+     * Mengembalikan matriks hasil perkalian matriks dengan matriks M2
+     */
     public Matriks multiplyMatriks(Matriks M2){
         Matriks MCopy = new Matriks(this.nRows, M2.nCols);
         int i,j,k;
@@ -103,6 +152,9 @@ public class Matriks {
         return MCopy;
     }
 
+    /*
+     * Mengembalikan matriks hasil perkalian matriks dengan matriks M2 yang kemudian dimodulo kan
+     */
     public Matriks multiplyMatriksWithMod(Matriks M2, int mod){
         Matriks MCopy = new Matriks(this.nRows, M2.nCols);
         int i,j,k;
@@ -118,6 +170,9 @@ public class Matriks {
         return MCopy;
     }
 
+    /*
+     * Mengembalikan matriks hasil perkalian matriks dengan konstanta k
+     */
     public Matriks multiplyByConst(int k){
         Matriks MCopy = new Matriks(this.nRows, this.nCols);
         int i,j;
@@ -129,10 +184,21 @@ public class Matriks {
         return MCopy;
     }
 
+    //Cek Matriks
+    /**
+     * Mengembalikan true jika ukuran matriks sama
+     * @param M2
+     * @return
+     */
     public boolean isMatrixSizeEqual(Matriks M2){
         return (this.nRows == M2.nRows && this.nCols == M2.nCols);
     }
 
+    /**
+     * Mengembalikan true jika isi matriks sama
+     * @param M2
+     * @return
+     */
     public boolean isMatrixEqual(Matriks M2){
         if(this.isMatrixSizeEqual(M2)){
             int i,j;
@@ -150,14 +216,28 @@ public class Matriks {
         }
     }
 
+    /**
+     * Mengembalikan true jika matriks merupakan matriks persegi
+     * @return
+     */
     public boolean isMatrixSquare(){
         return (this.nRows == this.nCols);
     }
 
-    public int countElmt(Matriks M){
-        return (M.nRows * M.nCols);
+    /**
+     * Mengembalikan jumlah elemen matriks
+     * @param M
+     * @return
+     */
+    public int countElmt(){
+        return (this.nRows * this.nCols);
     }
 
+    /**
+     * Mengembalikan true jika matriks merupakan matriks simetris
+     * yaitu jika matriks[i][j] == matriks[j][i]
+     * @return
+     */
     public boolean isSymmetric(){
         if(this.isMatrixSquare()){
             int i,j;
@@ -175,6 +255,10 @@ public class Matriks {
         }
     }
 
+    /**
+     * Mengembalikan true jika matriks merupakan matriks identitas (diagonal nya berisi 1, sisanya 0)
+     * @return
+     */
     public boolean isIdentity(){
         if(this.isMatrixSquare()){
             int i,j;
@@ -194,6 +278,11 @@ public class Matriks {
         }
     }
 
+    //Operasi Lainnya
+    /**
+     * Mengembalikan matriks hasil transpose matriks
+     * @return
+     */
     public Matriks transpose(){
         Matriks MCopy = new Matriks(this.nRows, this.nCols);
         int i,j;
@@ -203,5 +292,15 @@ public class Matriks {
             }
         }
         return MCopy;
+    }
+
+    public float determinant(){
+        if (this.isMatrixSquare()){
+            AljabarLinear AL = new AljabarLinear();
+            return AL.determinantByCofactor(this);
+        } else {
+            System.out.println("Matriks tidak persegi");
+            return 0;
+        }
     }
 }
