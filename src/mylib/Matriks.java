@@ -4,14 +4,14 @@ import java.util.Scanner;
 
 public class Matriks {
     //Atribut
-    int[][] Matriks = new int[1000][1000];
+    double[][] Matriks = new double[1000][1000];
     int nRows;
     int nCols;
 
     //Methods
     //Konstruktor
     public Matriks(int nRows, int nCols){
-        Matriks = new int[nRows][nCols];
+        Matriks = new double[nRows][nCols];
         this.nRows = nRows;
         this.nCols = nCols;
     }
@@ -85,7 +85,7 @@ public class Matriks {
      * Mengembalikan nilai dari indeks matriks yang diagonal
      * @return
      */
-    public int getElmtDiagonal(int i){
+    public double getElmtDiagonal(int i){
         return this.Matriks[i][i];
     }
 
@@ -294,7 +294,7 @@ public class Matriks {
         return MCopy;
     }
 
-    public float determinant(){
+    public double determinant(){
         if (this.isMatrixSquare()){
             AljabarLinear AL = new AljabarLinear();
             return AL.determinantByCofactor(this);

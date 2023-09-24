@@ -2,7 +2,7 @@ package mylib;
 // import mylib.Matriks;
 
 public class AljabarLinear {
-    public float cofactor(Matriks M, int r, int k){
+    public double cofactor(Matriks M, int r, int k){
         Matriks MKof = new Matriks(M.nRows-1, M.nCols-1);
         int i,j,ikof=0, jkof;
         for(i=0;i<M.nRows;i++){
@@ -22,7 +22,7 @@ public class AljabarLinear {
         }
     }
 
-    public float determinantByCofactor(Matriks M){
+    public double determinantByCofactor(Matriks M){
         if(M.countElmt()==1){
             return M.Matriks[0][0];
         } else {
