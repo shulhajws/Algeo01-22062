@@ -2,19 +2,22 @@ package mylib;
 // import mylib.Matriks;
 
 public class AljabarLinear {
-    public double cofactor(Matriks M, int r, int k){
+    public double cofactorAt(Matriks M, int r, int k){
         Matriks MKof = new Matriks(M.nRows-1, M.nCols-1);
-        int i,j,ikof=0, jkof;
+        int i,j,ikof=0, jkof=0;
         for(i=0;i<M.nRows;i++){
-            jkof=0;
-            for(j=0;j<M.nCols;j++){
-                if(i!=r && j!=k){
-                    MKof.Matriks[ikof][jkof] = M.Matriks[i][j];
-                    jkof++;
+            if(i!=r){
+                jkof=0;
+                for(j=0;j<M.nCols;j++){
+                    if(j!=k){
+                        MKof.Matriks[ikof][jkof] = M.Matriks[i][j];
+                        jkof++;
+                    }
                 }
+                ikof++;
             }
-            if(i!=r){ ikof++; }
         }
+
         if((k+r)%2==1){
             return (-1*determinantByCofactor(MKof));
         } else {
@@ -29,13 +32,29 @@ public class AljabarLinear {
             float det = 0;
             int i;
             for(i=0;i<M.nCols;i++){
-                det += M.Matriks[0][i] * cofactor(M,0,i);
+                det += M.Matriks[0][i] * cofactorAt(M,0,i);
             }
             return det;
         }
     }
 
+<<<<<<< Updated upstream
     public static void Gauss(Matriks m){
+=======
+    public Matriks inversMatriks(Matriks M){
+        Invers I = new Invers();
+        double det = determinantByCofactor(M);
+        if(det==0){
+            System.out.println("Matriks tidak memiliki invers");
+            return null;
+        } else {
+            return I.matriksAdjoin(M).multiplyByConst(1/det);
+        }
+    }
+
+    public void Gauss(Matriks m){
+        Gauss n = new Gauss();
+>>>>>>> Stashed changes
         int r = 0; int c = 0;
         while (!gauss && c < m.nCols){
             if (m.Matriks[r][c] != 1){

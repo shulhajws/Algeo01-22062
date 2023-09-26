@@ -77,7 +77,26 @@ public class MatriksTest {
 
         // Test determinant
         System.out.println("Determinant of Matrix1: " + matrix1.determinant());
+        System.out.println("Kofaktor of Matrix1: \n");
+        matrix1.kofaktor().displayMatriks();
+        System.out.println("Adjoin of Matrix1: \n");
+        matrix1.adjoin().displayMatriks();
+        System.out.println("Invers of Matrix1: \n");
+        matrix1.invers().displayMatriks();
 
+
+<<<<<<< Updated upstream
+=======
+        //test gauss
+        // Matriks Eselon = matrix1.eselonBaris();
+        // System.out.println("Matriks eselon barisnya: ");
+        // Eselon.displayMatriks();
+        // Matriks Eselon = new Matriks(rows1, cols1);
+        
+
+        // Matriks Eselon = matrix1.eselonBaris();
+        // Eselon.displayMatriks();
+>>>>>>> Stashed changes
         in.close();
     }
 }

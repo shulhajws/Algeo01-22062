@@ -173,7 +173,7 @@ public class Matriks {
     /*
      * Mengembalikan matriks hasil perkalian matriks dengan konstanta k
      */
-    public Matriks multiplyByConst(int k){
+    public Matriks multiplyByConst(double k){
         Matriks MCopy = new Matriks(this.nRows, this.nCols);
         int i,j;
         for(i=0;i<this.nRows;i++){
@@ -303,4 +303,36 @@ public class Matriks {
             return 0;
         }
     }
+<<<<<<< Updated upstream
+=======
+
+    public Matriks invers(){
+        if (this.isMatrixSquare()){
+            AljabarLinear AL = new AljabarLinear();
+            return AL.inversMatriks(this);
+        } else {
+            System.out.println("Matriks tidak persegi");
+            return null;
+        }
+    }
+
+    public Matriks kofaktor(){
+        Invers I = new Invers();
+        return I.matriksKofaktor(this);
+    }
+
+    public Matriks adjoin(){
+        Invers I = new Invers();
+        return I.matriksAdjoin(this);
+    }
+
+    public Matriks eselonBaris(){
+        Matriks MCopy = new Matriks(this.nRows, this.nCols);
+        this.copyMatriks(MCopy);
+        AljabarLinear G = new AljabarLinear();
+        G.Gauss(MCopy);
+
+        return MCopy;
+    }
+>>>>>>> Stashed changes
 }
