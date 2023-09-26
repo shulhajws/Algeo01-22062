@@ -1,7 +1,5 @@
 package mylib;
 
-// import Matriks.*;
-
 public class Gauss {
 
     /** Cek apakah matriks merupakan matriks eselon baris */
@@ -67,10 +65,7 @@ public class Gauss {
                 count++;
             }
         }
-        if (count == m.nCols){
-            yes = true;
-        }
-        return yes;
+        return true;       
     }
 
     public void swapRow(Matriks m, int r1, int r2){
