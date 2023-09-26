@@ -85,8 +85,6 @@ public class MatriksTest {
         matrix1.invers().displayMatriks();
 
 
-<<<<<<< Updated upstream
-=======
         //test gauss
         // Matriks Eselon = matrix1.eselonBaris();
         // System.out.println("Matriks eselon barisnya: ");
@@ -96,7 +94,6 @@ public class MatriksTest {
 
         // Matriks Eselon = matrix1.eselonBaris();
         // Eselon.displayMatriks();
->>>>>>> Stashed changes
         in.close();
     }
 }

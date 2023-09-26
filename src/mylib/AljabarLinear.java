@@ -38,9 +38,6 @@ public class AljabarLinear {
         }
     }
 
-<<<<<<< Updated upstream
-    public static void Gauss(Matriks m){
-=======
     public Matriks inversMatriks(Matriks M){
         Invers I = new Invers();
         double det = determinantByCofactor(M);
@@ -52,24 +49,43 @@ public class AljabarLinear {
         }
     }
 
-    public void Gauss(Matriks m){
-        Gauss n = new Gauss();
->>>>>>> Stashed changes
-        int r = 0; int c = 0;
-        while (!gauss && c < m.nCols){
-            if (m.Matriks[r][c] != 1){
-                double x = m.Matriks[r][c];
-                convertOne(x, r, m); 
-            } else {
-                continue;
-            }
-            for(int i = r + 1; r < m.nRows; r++){
-                double x = m.Matriks[r][c];
-                int rx = findFirstOne(m, c);
-                convertZero(x, rx, i);
-            }
-            r = findFirstOne(m, c);
-            c++; r++;
-        }
-    }
-}
+    // public static void Gauss(Matriks m){
+    //     Gauss n = new Gauss();
+    //     int r = 0; int c = 0;
+    //     while (!n.isGauss() && c < m.nCols){
+    //         if (m.Matriks[r][c] != 1){
+    //             double x = m.Matriks[r][c];
+    //             n.convertOne(x, r, m); 
+    //         } else {
+    //             continue;
+    //         }
+    //         for(int i = r + 1; r < m.nRows; r++){
+    //             double x = m.Matriks[r][c];
+    //             int rx = n.findFirstOne(m, c);
+    //             n.convertZero(x, rx, i, m);
+    //         }
+    //         r = n.findFirstOne(m, c);
+    //         c++; r++;
+    //     }
+    // }
+}  
+    // public void Gauss(Matriks m){
+    //     Gauss n = new Gauss();
+    //     int r = 0; int c = 0;
+    //     while (!gauss && c < m.nCols){
+    //         if (m.Matriks[r][c] != 1){
+    //             double x = m.Matriks[r][c];
+    //             convertOne(x, r, m); 
+    //         } else {
+    //             continue;
+    //         }
+    //         for(int i = r + 1; r < m.nRows; r++){
+    //             double x = m.Matriks[r][c];
+    //             int rx = findFirstOne(m, c);
+    //             convertZero(x, rx, i);
+    //         }
+    //         r = findFirstOne(m, c);
+    //         c++; r++;
+    //     }
+    // }
+

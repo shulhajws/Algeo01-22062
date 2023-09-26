@@ -303,8 +303,6 @@ public class Matriks {
             return 0;
         }
     }
-<<<<<<< Updated upstream
-=======
 
     public Matriks invers(){
         if (this.isMatrixSquare()){
@@ -326,13 +324,12 @@ public class Matriks {
         return I.matriksAdjoin(this);
     }
 
-    public Matriks eselonBaris(){
-        Matriks MCopy = new Matriks(this.nRows, this.nCols);
-        this.copyMatriks(MCopy);
-        AljabarLinear G = new AljabarLinear();
-        G.Gauss(MCopy);
+    // public Matriks eselonBaris(){
+    //     Matriks MCopy = new Matriks(this.nRows, this.nCols);
+    //     this.copyMatriks(MCopy);
+    //     AljabarLinear G = new AljabarLinear();
+    //     G.Gauss(MCopy);
 
-        return MCopy;
-    }
->>>>>>> Stashed changes
+    //     return MCopy;
+    // }
 }
