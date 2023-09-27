@@ -17,7 +17,6 @@ public class AljabarLinear {
                 ikof++;
             }
         }
-
         if((k+r)%2==1){
             return (-1*determinantByCofactor(MKof));
         } else {

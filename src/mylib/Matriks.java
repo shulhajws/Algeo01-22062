@@ -91,9 +91,10 @@ public class Matriks {
 
     /**
      * Membuat salinan dari matriks
+     * Pada pemanggilan, MCopy harus dideclare terlebih dahulu
      */
-    public void copyMatriks(){
-        Matriks MCopy = new Matriks(this.nRows, this.nCols);
+    public void copyMatriks(Matriks MCopy){
+        // Matriks MCopy = new Matriks(this.nRows, this.nCols);
         int i,j;
         for(i=0;i<this.nRows;i++){
             for(j=0;j<this.nCols;j++){
@@ -322,6 +323,11 @@ public class Matriks {
     public Matriks adjoin(){
         Invers I = new Invers();
         return I.matriksAdjoin(this);
+    }
+
+    public void splCramer(){
+        SPL S = new SPL();
+        S.Cramer(this);
     }
 
     // public Matriks eselonBaris(){
