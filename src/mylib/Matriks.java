@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public class Matriks {
     //Atribut
-    double[][] Matriks = new double[1000][1000];
-    int nRows;
-    int nCols;
+    public double[][] Matriks = new double[1000][1000];
+    public int nRows;
+    public int nCols;
 
     //Methods
     //Konstruktor
