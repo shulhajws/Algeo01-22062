@@ -23,14 +23,14 @@ public class Matriks {
      * @param nCols
      */
     public void readMatriks(int nRows, int nCols){
-        Scanner in = new Scanner(System.in);
-
+        Scanner readMat = new Scanner(System.in);
         int i,j;
         for(i=0;i<nRows;i++){
             for(j=0;j<nCols;j++){
-                this.Matriks[i][j]=in.nextInt();
+                this.Matriks[i][j]=readMat.nextDouble();
             }
         }
+        readMat.close();
     }
 
     //Tulis Matriks
@@ -285,7 +285,7 @@ public class Matriks {
      * @return
      */
     public Matriks transpose(){
-        Matriks MCopy = new Matriks(this.nRows, this.nCols);
+        Matriks MCopy = new Matriks(this.nCols, this.nRows);
         int i,j;
         for(i=0;i<this.nRows;i++){
             for(j=0;j<this.nCols;j++){
@@ -295,7 +295,7 @@ public class Matriks {
         return MCopy;
     }
 
-    public double determinant(){
+    public double determinantCofactor(){
         if (this.isMatrixSquare()){
             AljabarLinear AL = new AljabarLinear();
             return AL.determinantByCofactor(this);
@@ -305,7 +305,7 @@ public class Matriks {
         }
     }
 
-    public Matriks invers(){
+    public Matriks inversAdjoin(){
         if (this.isMatrixSquare()){
             AljabarLinear AL = new AljabarLinear();
             return AL.inversMatriks(this);
