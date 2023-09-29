@@ -36,6 +36,7 @@ public class Matriks {
     //Tulis Matriks
     /**
      * Menampilkan matriks ke layar
+     * @param m
      */
     public void displayMatriks(){
         int i,j;
@@ -303,5 +304,14 @@ public class Matriks {
             System.out.println("Matriks tidak persegi");
             return 0;
         }
+    }
+
+    public Matriks eselonBaris(){
+        Matriks MCopy = new Matriks(this.nRows, this.nCols);
+        this.copyMatriks(MCopy);
+        AljabarLinear G = new AljabarLinear();
+        G.Gauss(MCopy);
+
+        return MCopy;
     }
 }
