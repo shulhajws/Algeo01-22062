@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public class Matriks {
     //Atribut
-    double[][] Matriks = new double[1000][1000];
-    int nRows;
-    int nCols;
+    public double[][] Matriks = new double[1000][1000];
+    public int nRows;
+    public int nCols;
 
     //Methods
     //Konstruktor
@@ -92,7 +92,7 @@ public class Matriks {
     /**
      * Membuat salinan dari matriks
      */
-    public void copyMatriks(){
+    public Matriks copyMatriks(){
         Matriks MCopy = new Matriks(this.nRows, this.nCols);
         int i,j;
         for(i=0;i<this.nRows;i++){
@@ -100,6 +100,7 @@ public class Matriks {
                 MCopy.Matriks[i][j] = this.Matriks[i][j];
             }
         }
+        return MCopy;
     }
 
     //Operasi Matriks

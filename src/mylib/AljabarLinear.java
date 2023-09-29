@@ -34,23 +34,151 @@ public class AljabarLinear {
         }
     }
 
-    public static void Gauss(Matriks m){
-        Gauss n = new Gauss();
+    public void toGauss(Matriks m){
         int r = 0; int c = 0;
-        while (!n.isEselonBaris(m) && c < m.nCols){
-            if (m.Matriks[r][c] != 1){
-                double x = m.Matriks[r][c];
-                n.convertOne(x, r, m); 
+        Gauss g = new Gauss();
+        if (m.Matriks[r][c] == 0){
+            if (g.allZeroUnder(m, r, c)){
+                c++;
             } else {
-                continue;
+                int row = g.firstNoZeroCol(m, c);
+                g.swapRow(m, r, row);
             }
-            for(int i = r + 1; r < m.nRows; r++){
-                double x = m.Matriks[r][c];
-                int rx = n.findFirstOne(m, c);
-                n.convertZero(x, rx, i,m);
+        }
+        if (g.allColZero(m, c)){
+            c++;
+        }
+        while (c < m.nCols - 1 && r < m.nRows && !g.isEselonBaris(m)){
+            if (g.allRowZero(m, r)){
+                g.swapRow(m, r, m.nRows - 1);
             }
-            r = n.findFirstOne(m, c);
+            if (g.allZeroUnder(m, r, c)){
+                c++;
+            }
+            if (r < m.nRows && c < m.nCols){
+                if (m.Matriks[r][c] != 0){
+                    double x = m.Matriks[r][c];
+                    g.convertOne(x, r, c, m);
+                }
+            }
+            int b = r + 1;
+            if (b < m.nRows && c < m.nCols){
+                if (b == m.nRows - 1){
+                    if (g.allRowZero(m, r)){
+                        break;
+                    }
+                } else if (m.Matriks[b][c] == 0){
+                    if (g.allRowZero(m, r)){
+                        c++;
+                    } else if (g.allZeroUnder(m, b, c)){
+                        c++;
+                    } else {
+                        b++;
+                    }
+                }
+                if (c == m.nCols - 1){
+                    c = m.nCols - 1;
+                    r = m.nRows;
+                } else {
+                    if (g.allRowZero(m, b)){
+                        c = g.firstNoZeroRow(m, b-1);
+                    } else {
+                        c = g.firstNoZeroRow(m, b);
+                    }
+                }
+                int r1 = g.leadingOne(m, c);
+                if (r1 != -1){
+                    if (!g.indented(m, b, c)){
+                        while (b < m.nRows){
+                            if (m.Matriks[b][c] == 0){
+                                b++;
+                            } else {
+                                double x = m.Matriks[b][c];
+                                g.convertZero(x, r1, b, m);
+                                b++;
+                            }
+                        }
+                    }
+                } else {
+                    if (r < m.nRows && c < m.nCols){
+                        if (m.Matriks[r][c] != 0){
+                            double x = m.Matriks[r][c];
+                            g.convertOne(x, r, c, m);
+                        }
+                    }
+                }
+            }
+            if (c < m.nCols){
+                r = g.leadingOne(m, c) + 1;
+                c++;
+            } else {
+                r = m.nRows;
+                c = m.nCols;
+            }
+        }
+    }
+
+    public void toGaussJordan(Matriks m){
+        AljabarLinear spl = new AljabarLinear();
+        Gauss g = new Gauss();
+        spl.toGauss(m);
+        System.out.println("Gauss:");
+        m.displayMatriks();
+        System.out.println("\n");
+
+        int c = 0; int r = 0; int r1 = 0;
+        if (g.allColZero(m, c)){
+                c++;
+            }
+        if (g.leadingOne(m,c) == -1){
+            c++;
+        } 
+
+        while (c < m.nCols-1){
+            c = g.firstNoZeroRow(m, r);
+            r1 = g.leadingOne(m, c);
+                for (int b = r1 - 1; b >= 0; b--){
+                    double x = m.Matriks[b][c];
+                    g.convertZero(x, r1, b, m);
+                }
             c++; r++;
         }
+    }
+
+    public Matriks inversByGaussJordan(Matriks m){
+        double det = determinantByCofactor(m);
+        int rows1 = m.getLastIdxRow() + 1;
+        int cols1 = m.getLastIdxCol() + 1;
+        Matriks balikan = new Matriks(rows1, cols1);
+
+        if (det != 0 && m.isMatrixSquare()){
+            Matriks proses = new Matriks(rows1, cols1*2);
+            for(int b = 0; b < rows1; b++){
+                for(int k = 0; k < cols1; k++){
+                    proses.Matriks[b][k] = m.Matriks[b][k];
+                }
+            }
+            for(int b = 0; b < rows1; b++){
+                for(int k = cols1; k < cols1*2; k++){
+                    if (k - b == rows1){
+                        proses.Matriks[b][k] = 1;
+                    } else {
+                        proses.Matriks[b][k] = 0;
+                    }
+                }
+            }
+            toGaussJordan(proses);
+
+            
+            for(int b = 0; b < rows1; b++){
+                for(int k = 0; k < cols1; k++){
+                    balikan.Matriks[b][k] = proses.Matriks[b][k + rows1];
+                }
+            }
+        } else {
+            System.out.println("Tidak bisa dipecahkan dengan metode matriks balikan!\n");
+            balikan = m.copyMatriks();
+        }
+        return balikan;
     }
 }
