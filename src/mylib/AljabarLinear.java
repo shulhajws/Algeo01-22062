@@ -1,21 +1,19 @@
 package mylib;
+// import mylib.Matriks;
 
-
-public class Determinant {
-    public double cofactorAt(Matriks M, int r, int k){
+public class AljabarLinear {
+    public double cofactor(Matriks M, int r, int k){
         Matriks MKof = new Matriks(M.nRows-1, M.nCols-1);
-        int i,j,ikof=0, jkof=0;
+        int i,j,ikof=0, jkof;
         for(i=0;i<M.nRows;i++){
-            if(i!=r){
-                jkof=0;
-                for(j=0;j<M.nCols;j++){
-                    if(j!=k){
-                        MKof.Matriks[ikof][jkof] = M.Matriks[i][j];
-                        jkof++;
-                    }
+            jkof=0;
+            for(j=0;j<M.nCols;j++){
+                if(i!=r && j!=k){
+                    MKof.Matriks[ikof][jkof] = M.Matriks[i][j];
+                    jkof++;
                 }
-                ikof++;
             }
+            if(i!=r){ ikof++; }
         }
         if((k+r)%2==1){
             return (-1*determinantByCofactor(MKof));
@@ -31,20 +29,20 @@ public class Determinant {
             float det = 0;
             int i;
             for(i=0;i<M.nCols;i++){
-                det += M.Matriks[0][i] * cofactorAt(M,0,i);
+                det += M.Matriks[0][i] * cofactor(M,0,i);
             }
             return det;
         }
     }
 
     public double determinantByRowReduction (Matriks m) {
-        Operations op = new Operations();
+        Gauss n = new Gauss();
 
-        if (!op.isProcessed(m)) {
+        if (!n.isProcessed(m)) {
             return 0;
 
         } else {
-            if (op.isLowerTriangular(m) || op.isUpperTriangular(m)) {
+            if (n.isLowerTriangular(m) || n.isUpperTriangular(m)) {
                 double determinant = 1; int i;
 
                 for (i = 0; i <= m.getLastIdxRow(); i++) {
@@ -55,7 +53,7 @@ public class Determinant {
             } else {
                 int i, j, swapCount = 0;
 
-                while (!op.noZeroInDiagonal(m)) {
+                while (!n.noZeroInDiagonal(m)) {
                     for (j = 0; j <= m.getLastIdxCol(); j++) {
                         if (m.Matriks[j][j] == 0) {
                             i = j;
@@ -68,7 +66,7 @@ public class Determinant {
                                 return 0;
                             }
                             
-                            op.swapRow(m, j, i);
+                            n.swapRow(m, j, i);
                             swapCount++;
                         }
                     }
@@ -102,4 +100,25 @@ public class Determinant {
             }
         }
     }
+
+    // public static void Gauss(Matriks m){
+    //     int r = 0; int c = 0;
+    //     while (!gauss && c < m.nCols){
+    //         if (m.Matriks[r][c] != 1){
+    //             double x = m.Matriks[r][c];
+    //             convertOne(x, r, m); 
+    //         } else {
+    //             continue;
+    //         }
+    //         for(int i = r + 1; r < m.nRows; r++){
+    //             double x = m.Matriks[r][c];
+    //             int rx = findFirstOne(m, c);
+    //             convertZero(x, rx, i);
+    //         }
+    //         r = findFirstOne(m, c);
+    //         c++; r++;
+    //     }
+    // }
+
+
 }

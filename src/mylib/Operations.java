@@ -152,5 +152,72 @@ public class Operations {
         }
         return yes;
     }
+
+    public boolean isLowerTriangular (Matriks m) {
+        int i, j;
+
+        for (i = 0; i <= m.getLastIdxRow(); i++) {
+            for (j = i+1; j <= m.getLastIdxCol(); j++) {
+                if (m.Matriks[i][j] != 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean isUpperTriangular (Matriks m) {
+        int i, j;
+
+        for (j = 0; j <= m.getLastIdxRow(); j++) {
+            for (i = j+1; i <= m.getLastIdxCol(); i++) {
+                if (m.Matriks[i][j] != 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean noZeroInDiagonal (Matriks m) {
+        int i;
+
+        for (i = 0; i <= m.getLastIdxRow(); i++) {
+            if (m.Matriks[i][i] == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isProcessed (Matriks m) {
+        int i, j, count;
+
+        for (i = 0; i <= m.getLastIdxRow(); i++) {
+            count = 0;
+            for (j = 0; j <= m.getLastIdxCol(); j++) {
+                if (m.Matriks[i][j] == 0) {
+                    count++;
+                }
+            }
+            if (count == m.nCols) {
+                return false;
+            }
+        }
+
+        for (j = 0; j <= m.getLastIdxCol(); j++) {
+            count = 0;
+            for (i = 0; i <= m.getLastIdxRow(); i++) {
+                if (m.Matriks[i][j] == 0) {
+                    count++;
+                }
+            }
+            if (count == m.nRows) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
 
