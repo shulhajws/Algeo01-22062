@@ -16,5 +16,4 @@ public class Invers {
     public Matriks matriksAdjoin(Matriks M){
         return matriksKofaktor(M).transpose();
     }
-
 }

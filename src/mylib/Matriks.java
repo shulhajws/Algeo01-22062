@@ -23,14 +23,14 @@ public class Matriks {
      * @param nCols
      */
     public void readMatriks(int nRows, int nCols){
-        Scanner in = new Scanner(System.in);
-
+        Scanner readMat = new Scanner(System.in);
         int i,j;
         for(i=0;i<nRows;i++){
             for(j=0;j<nCols;j++){
-                this.Matriks[i][j]=in.nextInt();
+                this.Matriks[i][j]=readMat.nextDouble();
             }
         }
+        readMat.close();
     }
 
     //Tulis Matriks
@@ -92,6 +92,7 @@ public class Matriks {
 
     /**
      * Membuat salinan dari matriks
+     * Pada pemanggilan, MCopy harus dideclare terlebih dahulu
      */
     public Matriks copyMatriks(){
         Matriks MCopy = new Matriks(this.nRows, this.nCols);
@@ -175,7 +176,7 @@ public class Matriks {
     /*
      * Mengembalikan matriks hasil perkalian matriks dengan konstanta k
      */
-    public Matriks multiplyByConst(int k){
+    public Matriks multiplyByConst(double k){
         Matriks MCopy = new Matriks(this.nRows, this.nCols);
         int i,j;
         for(i=0;i<this.nRows;i++){
@@ -286,7 +287,7 @@ public class Matriks {
      * @return
      */
     public Matriks transpose(){
-        Matriks MCopy = new Matriks(this.nRows, this.nCols);
+        Matriks MCopy = new Matriks(this.nCols, this.nRows);
         int i,j;
         for(i=0;i<this.nRows;i++){
             for(j=0;j<this.nCols;j++){
@@ -296,7 +297,7 @@ public class Matriks {
         return MCopy;
     }
 
-    public double determinant(){
+    public double determinantCofactor(){
         if (this.isMatrixSquare()){
             AljabarLinear AL = new AljabarLinear();
             return AL.determinantByCofactor(this);
@@ -305,6 +306,40 @@ public class Matriks {
             return 0;
         }
     }
+
+    public Matriks inversAdjoin(){
+        if (this.isMatrixSquare()){
+            AljabarLinear AL = new AljabarLinear();
+            return AL.inversMatriks(this);
+        } else {
+            System.out.println("Matriks tidak persegi");
+            return null;
+        }
+    }
+
+    public Matriks kofaktor(){
+        Invers I = new Invers();
+        return I.matriksKofaktor(this);
+    }
+
+    public Matriks adjoin(){
+        Invers I = new Invers();
+        return I.matriksAdjoin(this);
+    }
+
+    public void splCramer(){
+        SPL S = new SPL();
+        S.Cramer(this);
+    }
+
+    // public Matriks eselonBaris(){
+    //     Matriks MCopy = new Matriks(this.nRows, this.nCols);
+    //     this.copyMatriks(MCopy);
+    //     AljabarLinear G = new AljabarLinear();
+    //     G.Gauss(MCopy);
+
+    //     return MCopy;
+    // }
 
     public Matriks eselonBaris(){
         Matriks MCopy = new Matriks(this.nRows, this.nCols);
