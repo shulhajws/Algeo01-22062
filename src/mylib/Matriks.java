@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public class Matriks {
     //Atribut
-    double[][] Matriks = new double[1000][1000];
-    int nRows;
-    int nCols;
+    public double[][] Matriks = new double[1000][1000];
+    public int nRows;
+    public int nCols;
 
     //Methods
     //Konstruktor
@@ -93,14 +93,15 @@ public class Matriks {
     /**
      * Membuat salinan dari matriks
      */
-    public void copyMatriks(Matriks MCopy){
-        MCopy = new Matriks(this.nRows, this.nCols);
+    public Matriks copyMatriks(){
+        Matriks MCopy = new Matriks(this.nRows, this.nCols);
         int i,j;
         for(i=0;i<this.nRows;i++){
             for(j=0;j<this.nCols;j++){
                 MCopy.Matriks[i][j] = this.Matriks[i][j];
             }
         }
+        return MCopy;
     }
 
     //Operasi Matriks
@@ -307,9 +308,9 @@ public class Matriks {
 
     public Matriks eselonBaris(){
         Matriks MCopy = new Matriks(this.nRows, this.nCols);
-        this.copyMatriks(MCopy);
+        MCopy = this.copyMatriks();
         AljabarLinear G = new AljabarLinear();
-        G.Gauss(MCopy);
+        G.toGauss(MCopy);
 
         return MCopy;
     }

@@ -1,9 +1,11 @@
 import java.util.Scanner;
 import mylib.Matriks;
-
+import mylib.AljabarLinear;
+// import mylib.Gauss;
 public class MatriksTest {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
+        AljabarLinear spl = new AljabarLinear();
 
         System.out.print("Enter the number of rows for Matrix1: ");
         int rows1 = in.nextInt();
@@ -23,9 +25,9 @@ public class MatriksTest {
         // System.out.println("Enter values for Matrix2:");
         // matrix2.readMatriks(rows2,cols2);
 
-        // // Test displayMatriks
-        // System.out.println("Matrix1:");
-        // matrix1.displayMatriks();
+        //Test displayMatriks
+        System.out.println("Matrix1:");
+        matrix1.displayMatriks();
 
         // System.out.println("Matrix2:");
         // matrix2.displayMatriks();
@@ -75,18 +77,20 @@ public class MatriksTest {
         // System.out.println("Transpose of Matrix2:");
         // transposedMatrix2.displayMatriks();
 
-        // Test determinant
+        //Test determinant
         System.out.println("Determinant of Matrix1: " + matrix1.determinant());
 
-        //test gauss
-        // Matriks Eselon = matrix1.eselonBaris();
-        // System.out.println("Matriks eselon barisnya: ");
-        // Eselon.displayMatriks();
-        // Matriks Eselon = new Matriks(rows1, cols1);
+        spl.toGaussJordan(matrix1);
+        System.out.println("Matrix Gauss Jordan:");
+        matrix1.displayMatriks();
         
+        //Test displayMatriks
+        System.out.println("Matrix1:");
+        matrix1.displayMatriks();
 
-        Matriks Eselon = matrix1.eselonBaris();
-        Eselon.displayMatriks();
-        in.close();
-    }
-}
+        
+    
+        in.close(); 
+    
+        }
+    } 
