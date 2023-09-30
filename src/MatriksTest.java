@@ -1,5 +1,13 @@
 import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import mylib.Matriks;
+<<<<<<< Updated upstream
+=======
+import mylib.AljabarLinear;
+>>>>>>> Stashed changes
 
 public class MatriksTest {
     public static void main(String[] args) {
@@ -9,23 +17,42 @@ public class MatriksTest {
         int rows1 = in.nextInt();
         System.out.print("Enter the number of columns for Matrix1: ");
         int cols1 = in.nextInt();
+        AljabarLinear spl = new AljabarLinear(); 
 
         Matriks matrix1 = new Matriks(rows1, cols1);
         System.out.println("Enter values for Matrix1:");
         matrix1.readMatriks(rows1, cols1);
 
+<<<<<<< Updated upstream
         System.out.print("Enter the number of rows for Matrix2: ");
         int rows2 = in.nextInt();
         System.out.print("Enter the number of columns for Matrix2: ");
         int cols2 = in.nextInt();
+=======
+        // double det = spl.determinantByCofactor(matrix1);
+        // System.out.println("determinan: " + det);
+
+        
+    
+        // System.out.print("Enter the number of rows for Matrix2: ");
+        // int rows2 = in.nextInt();
+        // System.out.print("Enter the number of columns for Matrix2: ");
+        // int cols2 = in.nextInt();
+>>>>>>> Stashed changes
 
         Matriks matrix2 = new Matriks(rows2, cols2);
         System.out.println("Enter values for Matrix2:");
         matrix2.readMatriks(rows2,cols2);
 
+<<<<<<< Updated upstream
         // Test displayMatriks
         System.out.println("Matrix1:");
         matrix1.displayMatriks();
+=======
+        // //Test displayMatriks
+        // System.out.println("Matrix1:");
+        // matrix1.displayMatriks();
+>>>>>>> Stashed changes
 
         System.out.println("Matrix2:");
         matrix2.displayMatriks();
@@ -75,9 +102,31 @@ public class MatriksTest {
         System.out.println("Transpose of Matrix2:");
         transposedMatrix2.displayMatriks();
 
+<<<<<<< Updated upstream
         // Test determinant
         System.out.println("Determinant of Matrix1: " + matrix1.determinant());
 
         in.close();
     }
 }
+=======
+        // //Test determinant
+        // System.out.println("Determinant of Matrix1: " + matrix1.determinant());
+
+        // spl.toGauss(matrix1);
+        // System.out.println("Matrix Gauss:");
+        // matrix1.displayMatriks();
+
+        // spl.toGaussJordan(matrix1);
+        // System.out.println("Matrix Gauss Jordan:");
+        // matrix1.displayMatriks();
+        
+        // Test displayMatriks
+        // System.out.println("Matrix1:");
+        // matrix1.displayMatriks();
+    
+        in.close(); 
+    
+        }
+    } 
+>>>>>>> Stashed changes

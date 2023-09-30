@@ -303,4 +303,16 @@ public class Matriks {
             return 0;
         }
     }
+<<<<<<< Updated upstream
+=======
+
+    // public Matriks eselonBaris(){
+    //     Matriks MCopy = new Matriks(this.nRows, this.nCols);
+    //     this.copyMatriks(MCopy);
+    //     AljabarLinear G = new AljabarLinear();
+    //     G.Gauss(MCopy);
+
+    //     return MCopy;
+    // }
+>>>>>>> Stashed changes
 }
