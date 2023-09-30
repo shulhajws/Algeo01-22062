@@ -4,12 +4,13 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws Exception {
         boolean programOn = true;
+        int choice;
         Scanner in = new Scanner(System.in);
         while(programOn){
             Util u = new Util();
             u.displayMenu();
             System.out.print("Operasi apa yang ingin kamu lakukan? (Masukkan pilihan menu dalam angka): ");
-            int choice = in.nextInt();
+            choice = in.nextInt();
 
             switch(choice){
                 case 1: //SPL

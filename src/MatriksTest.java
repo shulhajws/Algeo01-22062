@@ -1,15 +1,15 @@
 import java.util.Scanner;
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import mylib.Matriks;
-import mylib.AljabarLinear;
+import mylib.Determinant;
 // import mylib.Gauss;
 public class MatriksTest {
     public static void main(String[] args) throws FileNotFoundException{
         // Test readMatriksFromFile
-        // Matriks matrix1 = new Matriks(0,0);
-        // ReadFile file = new ReadFile();
-        // matrix1 = file.readMatriksFromFile("lib/testfile/matriks 3x3.txt");
-        // matrix1.displayMatriks();
+        Matriks matrix1 = new Matriks(0,0);
+        ReadFile file = new ReadFile();
+        matrix1 = file.readMatriksFromFile("lib/testfile/matriks 3x3.txt");
+        matrix1.displayMatriks();
         // Scanner in = new Scanner(System.in);
         // AljabarLinear spl = new AljabarLinear();
 

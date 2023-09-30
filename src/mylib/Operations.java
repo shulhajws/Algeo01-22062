@@ -1,6 +1,8 @@
 package mylib;
 
-public class Gauss {
+public class Operations {
+
+    Determinant d = new Determinant();
 
     public boolean isEselonBaris(Matriks M){
         // jika 0 semua diterima
@@ -53,7 +55,10 @@ public class Gauss {
                 count++;
             }
         }
-        return true;       
+        if (count == m.nCols){
+            yes = true;
+        }
+        return yes;
     }
 
     public boolean allColZero(Matriks m, int c){
@@ -136,5 +141,16 @@ public class Gauss {
         return (c > firstNoZeroRow(m, r));
     }
 
+    public boolean inversible(Matriks m){
+        boolean yes = true;
+        double det = d.determinantByCofactor(m);
+        if (det == 0){
+            System.out.println("Tidak memilikin matriks balikan!\n");
+            yes = false;
+        } else {
+            yes = true;
+        }
+        return yes;
+    }
 }
 

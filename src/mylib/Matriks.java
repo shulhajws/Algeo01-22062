@@ -299,7 +299,7 @@ public class Matriks {
 
     public double determinantCofactor(){
         if (this.isMatrixSquare()){
-            AljabarLinear AL = new AljabarLinear();
+            Determinant AL = new Determinant();
             return AL.determinantByCofactor(this);
         } else {
             System.out.println("Matriks tidak persegi");
@@ -309,8 +309,8 @@ public class Matriks {
 
     public Matriks inversAdjoin(){
         if (this.isMatrixSquare()){
-            AljabarLinear AL = new AljabarLinear();
-            return AL.inversMatriks(this);
+            Invers i = new Invers();
+            return i.inversMatriks(this);
         } else {
             System.out.println("Matriks tidak persegi");
             return null;
@@ -332,21 +332,4 @@ public class Matriks {
         S.Cramer(this);
     }
 
-    // public Matriks eselonBaris(){
-    //     Matriks MCopy = new Matriks(this.nRows, this.nCols);
-    //     this.copyMatriks(MCopy);
-    //     AljabarLinear G = new AljabarLinear();
-    //     G.Gauss(MCopy);
-
-    //     return MCopy;
-    // }
-
-    public Matriks eselonBaris(){
-        Matriks MCopy = new Matriks(this.nRows, this.nCols);
-        MCopy = this.copyMatriks();
-        AljabarLinear G = new AljabarLinear();
-        G.toGauss(MCopy);
-
-        return MCopy;
-    }
 }
