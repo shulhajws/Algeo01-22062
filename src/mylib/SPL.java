@@ -1,92 +1,48 @@
-package mylib;
+package mylib;;
 
 public class SPL {
-    
-    /* Melakukan SPL dengan kaidah cramer. 
-     * khusus untuk SPL dengan n peubah dan n persamaan
-     * Solusi Cramer pastilah unik.
-    */
-    public void Cramer(Matriks M){
-        Determinant AL = new Determinant();
-        // Mendefinikasikan matriks A pada SPL Ax=b
-        Matriks MOri = new Matriks(M.nRows,M.nCols-1);
-        for(int i=0;i<M.nRows;i++){
-            for(int j=0;j<M.nCols-1;j++){
-                MOri.Matriks[i][j] = M.Matriks[i][j];
-            }
-        }
-        // Mendefinikasikan matriks b pada SPL Ax=b
-        Matriks b = new Matriks(M.nRows,1);
-        for(int i=0;i<M.nRows;i++){
-            b.Matriks[i][0] = M.Matriks[i][M.nCols-1];
-        }
-        //Menghitung determinan matriks A
-        double detOri = AL.determinantByCofactor(MOri);
 
-        int j;
-        if(detOri==0){
-            System.out.println("Matriks tidak memiliki solusi");
-        } else {
-            System.out.println("Solusi SPL:");
-            for(j=0;j<MOri.nCols;j++){ //lakukan pengulangan pada setiap kolom
-                //pendefinisian matriks cramer yang akan dioperasikan
-                Matriks MCramer = new Matriks(MOri.nRows,MOri.nCols);
-                MCramer=MOri.copyMatriks();
-                changeColWithb(MCramer,j,b);
+// METODE PENYELESAIAN SPL
 
-                //menghitung determinan matriks cramer
-                double detCramer = AL.determinantByCofactor(MCramer);
-
-                //menampilkan solusi SPL
-                System.out.println("x"+(j+1)+" = "+detCramer/detOri);
-            }
-        }   
-    }
-
-    public void changeColWithb(Matriks M, int i, Matriks b){
-        //Mengganti kolom ke-i dengan kolom b
-        for(int j=0;j<M.nRows;j++){
-            M.Matriks[j][i] = b.Matriks[j][0];
-        }
-    }
-
+// 1. Metode Eliminasi Gauss
+    /* Prosedur untuk mengubah matriks yang diberikan hingga terbentuk matriks Gauss (eselon baris) */
     public void toGauss(Matriks m){
+        Operations o = new Operations();
         int r = 0; int c = 0;
-        Operations g = new Operations();
         if (m.Matriks[r][c] == 0){
-            if (g.allZeroUnder(m, r, c)){
+            if (o.allZeroUnder(m, r, c)){
                 c++;
             } else {
-                int row = g.firstNoZeroCol(m, c);
-                g.swapRow(m, r, row);
+                int row = o.firstNoZeroCol(m, c);
+                o.swapRow(m, r, row);
             }
         }
-        if (g.allColZero(m, c)){
+        if (o.allColZero(m, c)){
             c++;
         }
-        while (c < m.nCols - 1 && r < m.nRows && !g.isEselonBaris(m)){
-            if (g.allRowZero(m, r)){
-                g.swapRow(m, r, m.nRows - 1);
+        while (c < m.nCols - 1 && r < m.nRows && !o.isEselonBaris(m)){
+            if (o.allRowZero(m, r)){
+                o.swapRow(m, r, m.nRows - 1);
             }
-            if (g.allZeroUnder(m, r, c)){
+            if (o.allZeroUnder(m, r, c)){
                 c++;
             }
             if (r < m.nRows && c < m.nCols){
                 if (m.Matriks[r][c] != 0){
                     double x = m.Matriks[r][c];
-                    g.convertOne(x, r, c, m);
+                    o.convertOne(x, r, c, m);
                 }
             }
             int b = r + 1;
             if (b < m.nRows && c < m.nCols){
                 if (b == m.nRows - 1){
-                    if (g.allRowZero(m, r)){
+                    if (o.allRowZero(m, r)){
                         break;
                     }
                 } else if (m.Matriks[b][c] == 0){
-                    if (g.allRowZero(m, r)){
+                    if (o.allRowZero(m, r)){
                         c++;
-                    } else if (g.allZeroUnder(m, b, c)){
+                    } else if (o.allZeroUnder(m, b, c)){
                         c++;
                     } else {
                         b++;
@@ -96,21 +52,21 @@ public class SPL {
                     c = m.nCols - 1;
                     r = m.nRows;
                 } else {
-                    if (g.allRowZero(m, b)){
-                        c = g.firstNoZeroRow(m, b-1);
+                    if (o.allRowZero(m, b)){
+                        c = o.firstNoZeroRow(m, b-1);
                     } else {
-                        c = g.firstNoZeroRow(m, b);
+                        c = o.firstNoZeroRow(m, b);
                     }
                 }
-                int r1 = g.leadingOne(m, c);
+                int r1 = o.leadingOne(m, c);
                 if (r1 != -1){
-                    if (!g.indented(m, b, c)){
+                    if (!o.indented(m, b, c)){
                         while (b < m.nRows){
                             if (m.Matriks[b][c] == 0){
                                 b++;
                             } else {
                                 double x = m.Matriks[b][c];
-                                g.convertZero(x, r1, b, m);
+                                o.convertZero(x, r1, b, m);
                                 b++;
                             }
                         }
@@ -119,13 +75,13 @@ public class SPL {
                     if (r < m.nRows && c < m.nCols){
                         if (m.Matriks[r][c] != 0){
                             double x = m.Matriks[r][c];
-                            g.convertOne(x, r, c, m);
+                            o.convertOne(x, r, c, m);
                         }
                     }
                 }
             }
             if (c < m.nCols){
-                r = g.leadingOne(m, c) + 1;
+                r = o.leadingOne(m, c) + 1;
                 c++;
             } else {
                 r = m.nRows;
@@ -134,15 +90,55 @@ public class SPL {
         }
     }
 
-    public void toGaussJordan(Matriks m){
-        SPL spl = new SPL();
+    /*Memberikan solusi dari SPL */
+    public String[] solveByGauss(Matriks m){
         Operations o = new Operations();
-        spl.toGauss(m);
-        System.out.println("Gauss:");
-        m.displayMatriks();
-        System.out.println("\n");
+        boolean no, many, one = false;
+        int b = m.nRows - 1;
 
+        toGauss(m);
+
+        if (o.allZeroBefore(m, b)){
+            no = true; many = false; one = false;
+        } else if (o.oneSolution(m)){
+            one = true; many = false; no = false;
+        } else if (o.allRowZero(m, b)){
+            many = true;no = false; one = false;
+        } else {
+            many = true; no = false; one = false;
+        }
+
+        double[] x; x = new double[999999];
+        String[] j; j = new String[999999];
+        
+        if (one){
+            for(int r = m.nCols - 2; r >= 0; r-- ){
+                x[r] = m.Matriks[r][m.nCols - 1];
+                for(int c = r + 1; c < m.nCols - 1; c++){
+                    x[r] = x[r] - m.Matriks[r][c] * x[r];
+                }
+            }
+            for(int r = 0; r < m.nCols - 1; r++){
+            j[r] = "x" + Integer.toString(r+1) + " = " + Double.toString(x[r]) + "\n";
+            }
+        } else if (many){
+            j = o.manySolution(m, j);
+
+        } else if (no){
+            j = null;
+            System.out.println("Tidak ada solusi.\n");
+        }
+        return j;
+    }
+
+
+// 2. Metode Eliminasi Gauss-Jordan
+    /* Prosedur untuk mengubah matriks yang diberikan hingga terbentuk matriks Gauss-Jordan (eselon baris tereduksi) */
+    public void toGaussJordan(Matriks m){
+        Operations o = new Operations();
+        toGauss(m);
         int c = 0; int r = 0; int r1 = 0;
+
         if (o.allColZero(m, c)){
                 c++;
             }
@@ -161,6 +157,145 @@ public class SPL {
         }
     }
 
+    /*Memberikan solusi dari SPL */
+    public String[] solveByGaussJordan(Matriks m){
+        Operations o = new Operations();
+        boolean no, many, one = false;
+        int b = m.nRows - 1;
+
+        toGaussJordan(m);
+
+        // Mengecek kondisi matriks
+        if (o.allZeroBefore(m, b)){
+            no = true; many = false; one = false;
+        } else if (o.oneSolution(m)){
+            one = true; many = false; no = false;
+        } else if (o.allRowZero(m, b)){
+            many = true;no = false; one = false;
+        } else {
+            many = true; no = false; one = false;
+        }
+
+        // Inisialisasi solusi
+        double[] x; x = new double[999999];
+        String[] j; j = new String[999999];
+        
+        // Sesuai kondisi matriks
+        if (one){
+            for(int r = m.nCols - 2; r >= 0; r-- ){
+                x[r] = m.Matriks[r][m.nCols - 1];
+            }
+            for(int r = 0; r < m.nCols - 1; r++){
+            j[r] = "x" + Integer.toString(r+1) + " = " + Double.toString(x[r]) + "\n";
+            }
+        } else if (many){
+            j = o.manySolution(m, j);
+
+        } else if (no){
+            j = null;
+            System.out.println("Tidak ada solusi.\n");
+        }
+        return j;
+    }
+
+// 3. Metode Matriks Balikan
+    /* Prosedur untuk mengubah matriks yang diberikan hingga terbentuk matriks Gauss-Jordan (eselon baris tereduksi) */
+    public String[] solveByInverse(Matriks m){
+        // Inisialisasi
+        Operations o = new Operations();
+        Invers invers = new Invers();
+        int rows = m.getLastIdxRow();
+        int cols = m.getLastIdxCol();
+        double[] x; x = new double[999999];
+        String[] j; j = new String[999999];
+
+        if ((rows != cols - 1)){
+            System.out.println("Tidak bisa dipecahkan dengan metode matriks balikan!\n");
+        } else {
+            Matriks A = new Matriks(rows + 1, rows + 1);
+            Matriks B = new Matriks(rows + 1, 1);
+            for(int b = 0; b < m.nRows; b++){
+                for(int k = 0; k < cols; k++){
+                    A.Matriks[b][k] = m.Matriks[b][k];
+                }
+            }
+            for(int b = 0; b < m.nRows; b++){
+                B.Matriks[b][0] = m.Matriks[b][cols];
+            }
+            if (!o.inversible(A)){
+                System.out.println("Tidak bisa dipecahkan dengan metode matriks balikan!\n");
+            } else {
+                Matriks Ai;
+                Ai = invers.inversByGaussJordan(A);
+                Matriks hasil = new Matriks(rows + 1, 1);
+                for(int b = 0; b < Ai.nRows; b++){
+                    for(int k = 0; k < Ai.nCols; k++){
+                        hasil.Matriks[b][0] = hasil.Matriks[b][0] + Ai.Matriks[b][k] * B.Matriks[k][0];
+                    }
+                }
+                for(int i = 0; i < hasil.nRows; i++){
+                    x[i] = hasil.Matriks[i][0];
+                }
+                for(int i = 0; i < hasil.nRows; i++){
+                    j[i] = "x" + Integer.toString(i+1) + " = " + Double.toString(x[i]) + "\n";
+                }
+            }
+        }
+        return j;
+    }
+
+
     
-    
+
+// 4. Metode Cramer
+    /* Melakukan SPL dengan kaidah cramer. 
+     * khusus untuk SPL dengan n peubah dan n persamaan
+     * Solusi Cramer pastilah unik. */
+    public void Cramer(Matriks M){
+        // Inisialisasi tempat simpan jawaban
+        Determinant d = new Determinant();
+        String[] jaw; jaw = new String[999999];
+
+        // Mendefinikasikan matriks A pada SPL Ax=b
+        Matriks MOri = new Matriks(M.nRows,M.nCols-1);
+        for(int i=0;i<M.nRows;i++){
+            for(int j=0;j<M.nCols-1;j++){
+                MOri.Matriks[i][j] = M.Matriks[i][j];
+            }
+        }
+        // Mendefinikasikan matriks b pada SPL Ax=b
+        Matriks b = new Matriks(M.nRows,1);
+        for(int i=0;i<M.nRows;i++){
+            b.Matriks[i][0] = M.Matriks[i][M.nCols-1];
+        }
+        //Menghitung determinan matriks A
+        double detOri = d.determinantByCofactor(MOri);
+
+        int j;
+        if(detOri==0){
+            System.out.println("Matriks tidak memiliki solusi");
+        } else {
+            System.out.println("Solusi SPL:");
+            for(j=0;j<MOri.nCols;j++){ //lakukan pengulangan pada setiap kolom
+                //pendefinisian matriks cramer yang akan dioperasikan
+                Matriks MCramer = new Matriks(MOri.nRows,MOri.nCols);
+                MCramer=MOri.copyMatriks();
+                changeColWithb(MCramer,j,b);
+
+                //menghitung determinan matriks cramer
+                double detCramer = d.determinantByCofactor(MCramer);
+
+                //menampilkan solusi SPL
+                jaw[j] = "x"+ Integer.toString(j+1) +" = " + Double.toString(detCramer/detOri) + "\n";
+            }
+        }   
+    }
+
+    public void changeColWithb(Matriks M, int i, Matriks b){
+        //Mengganti kolom ke-i dengan kolom b
+        for(int j=0;j<M.nRows;j++){
+            M.Matriks[j][i] = b.Matriks[j][0];
+        }
+    }
 }
+
