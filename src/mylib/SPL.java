@@ -131,7 +131,7 @@ public class SPL {
         return j;
     }
 
-    public double[] solveByGaussDouble(Matriks m){
+    public Matriks solveByGaussDouble(Matriks m){
         Operations o = new Operations();
         boolean no, many, one = false;
         int b = m.nRows - 1;
@@ -150,6 +150,7 @@ public class SPL {
 
         double[] x; x = new double[999999];
         String[] j; j = new String[999999];
+        Matriks matriks = new Matriks(m.nRows, 1);
         
         if (one){
             for(int r = m.nCols - 2; r >= 0; r-- ){
@@ -157,6 +158,9 @@ public class SPL {
                 for(int c = r + 1; c < m.nCols - 1; c++){
                     x[r] = x[r] - m.Matriks[r][c] * x[r];
                 }
+            }
+            for(int r = 0; r < m.nCols - 1; r++){
+                matriks.Matriks[r][1] = x[r];
             }
             for(int r = 0; r < m.nCols - 1; r++){
             j[r] = "x" + Integer.toString(r+1) + " = " + Double.toString(x[r]) + "\n";
@@ -168,7 +172,7 @@ public class SPL {
             j = null;
             System.out.println("Tidak ada solusi.\n");
         }
-        return x;
+        return matriks;
     }
 
 
