@@ -1,7 +1,8 @@
 // import java.util.Scanner;
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.Scanner;
-
+import mylib.*;
+import mylib.Bicubic;
 import mylib.Matriks;
 // import mylib.Operations;
 // import mylib.SPL;
@@ -12,6 +13,24 @@ import mylib.SPL;
 public class MatriksTest {
     
     public static void main(String[] args) throws FileNotFoundException{
+        Bicubic bic = new Bicubic();
+        Invers inv = new Invers();
+
+        Matriks matrix1 = new Matriks(4, 4);
+        
+        System.out.println("Enter values for Matrix1:");
+        matrix1.readMatriks(4, 4);
+        matrix1.displayMatriks();
+        System.out.println("----------------------------------");
+
+        (inv.inversByGaussJordan(matrix1)).displayMatriks();
+        System.out.println("----------------------------------");
+
+        Matriks X = bic.makeMatriksX();
+        X.displayMatriks();
+        System.out.println("----------------------------------");
+        Matriks xInvers = inv.inversMatriks(X);
+        xInvers.displayMatriks();
         // Regresi reg = new Regresi();
         // Matriks apani = reg.multipleLinearRegression();
         // reg.mlrEquation(apani);
@@ -100,7 +119,7 @@ public class MatriksTest {
         // // Test determinant
         // System.out.println("Determinant of Matrix1: " + matrix1.determinant());
 
-        in.close();
+        // in.close();
     }
 }
-}
+
