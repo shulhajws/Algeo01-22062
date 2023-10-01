@@ -59,12 +59,18 @@ public class Determinant {
                     for (j = 0; j <= m.getLastIdxCol(); j++) {
                         if (m.Matriks[j][j] == 0) {
                             i = j;
+                            int iteration = 0;
 
-                            while (i <= m.getLastIdxRow() && m.Matriks[i][j] == 0) {
-                                i++;
+                            while (iteration < m.nRows-1 && m.Matriks[i][j] == 0) {
+                                if (i == m.getLastIdxRow()) {
+                                    i = 0;
+                                } else {
+                                    i++;
+                                }
+                                iteration++;
                             }
 
-                            if (i > m.getLastIdxRow()) {
+                            if (iteration == m.nRows-1) {
                                 return 0;
                             }
                             
