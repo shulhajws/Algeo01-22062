@@ -30,7 +30,6 @@ public class Matriks {
                 this.Matriks[i][j]=readMat.nextDouble();
             }
         }
-        readMat.close();
     }
 
     //Tulis Matriks

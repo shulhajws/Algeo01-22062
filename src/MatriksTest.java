@@ -1,6 +1,6 @@
 // import java.util.Scanner;
 import java.io.FileNotFoundException;  // Import this class to handle errors
-// import mylib.Matriks;
+import mylib.Matriks;
 // import mylib.Operations;
 // import mylib.SPL;
 // import mylib.Invers;
@@ -10,8 +10,10 @@ public class MatriksTest {
     
     public static void main(String[] args) throws FileNotFoundException{
         Regresi reg = new Regresi();
+        Matriks apani = reg.multipleLinearRegression();
+        reg.mlrEquation(apani);
+        reg.mlrEstimation(apani);
 
-        reg.mlrEquation();
         // Test readMatriksFromFile
         // Matriks matrix1 = new Matriks(0,0);
         // ReadFile file = new ReadFile();

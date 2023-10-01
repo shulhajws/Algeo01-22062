@@ -3,9 +3,8 @@ package mylib;
 import java.util.Scanner;
 
 public class Regresi {
-
+    Scanner input = new Scanner(System.in);
     public Matriks multipleLinearRegression () {
-        Scanner input = new Scanner(System.in);
         SPL spl = new SPL();
 
         System.out.print("Masukkan jumlah peubah x: ");
@@ -25,7 +24,6 @@ public class Regresi {
         System.out.print("\n");
 
         dataMatrix.readMatriks(numOfData, numOfVariable+1);
-        input.close();
 
         int j, k;
         for (i = 0; i <= regressionMatrix.getLastIdxRow(); i++) {
@@ -76,51 +74,39 @@ public class Regresi {
             }
         }
 
-        regressionMatrix.displayMatriks();
         return spl.solveByGaussRegresi(regressionMatrix);
-        // regressionMatrix.displayMatriks();
-        // double[] solution = spl.solveByGaussDouble(regressionMatrix);
-
-        // for (i = 0; i < numOfVariable; i++) {
-        //     System.out.println("solusi " + (i+1) + ": " + solution[i]);
-        // }
     }
 
-    public void mlrEquation() {
-        Matriks solution = multipleLinearRegression();
-
+    public void mlrEquation(Matriks solution) {
         System.out.println("Persamaan regresi linear berganda berdasarkan data tersebut adalah sebagai berikut:");
         System.out.print("Y = ");
 
-        int i;
-        for (i = 0; i <= solution.getLastIdxCol(); i++) {
-            if (i == 0) {
+        int i, x = 0;
+        for (i = solution.getLastIdxCol(); i >= 0; i--) {
+            if (i == solution.getLastIdxCol()) {
                 System.out.print(solution.Matriks[0][i]);
             } else {
                 if (solution.Matriks[0][i] >= 0) {
-                    System.out.print(" + " + solution.Matriks[0][i] + "X" + i);
+                    System.out.print(" + " + solution.Matriks[0][i] + " X" + x);
                 } else {
-                    System.out.print(" - " + (solution.Matriks[0][i]*(-1)) + "X" + i);
+                    System.out.print(" - " + (solution.Matriks[0][i]*(-1)) + " X" + x);
                 }
             }
+            x++;
         }
         System.out.println();
     }
 
-    public void mlrEstimation() {
-        Matriks solution = multipleLinearRegression();
-        Scanner input = new Scanner(System.in);
-        Double y = solution.Matriks[0][0];
+    public void mlrEstimation(Matriks solution) {
+        Double y = solution.Matriks[0][solution.getLastIdxCol()];
 
-        int i;
-        for (i = 1; i <= solution.getLastIdxCol(); i++) {
-            System.out.print("Masukkan nilai variabel peubah " + i + ": ");
+        int i, p = 1;
+        for (i = solution.getLastIdxCol()-1; i >= 0; i--) {
+            System.out.print("Masukkan nilai variabel peubah " + p + ": ");
             Double x = input.nextDouble();
             y += x*(solution.Matriks[0][i]);
+            p++;
         }
-
-        input.close();
-
         System.out.println("Estimasi nilai variabel terikat berdasarkan regresu linear berganda adalah: ");
         System.err.println(y);
     }
