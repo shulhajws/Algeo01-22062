@@ -147,33 +147,32 @@ public class SPL {
         } else {
             many = true; no = false; one = false;
         }
-
-        double[] x; x = new double[999999];
+        
         String[] j; j = new String[999999];
-        Matriks matriks = new Matriks(m.nRows, 1);
+        Matriks x = new Matriks(1, m.nCols - 1);
         
         if (one){
             for(int r = m.nCols - 2; r >= 0; r-- ){
-                x[r] = m.Matriks[r][m.nCols - 1];
+                x.Matriks[0][r] = m.Matriks[r][m.nCols - 1];
                 for(int c = r + 1; c < m.nCols - 1; c++){
-                    x[r] = x[r] - m.Matriks[r][c] * x[r];
+                    x.Matriks[0][r] = x.Matriks[0][r] - m.Matriks[r][c] * x.Matriks[0][r];
                 }
             }
             for(int r = 0; r < m.nCols - 1; r++){
-                matriks.Matriks[r][1] = x[r];
+                System.out.println(x.Matriks[0][r]);
             }
             for(int r = 0; r < m.nCols - 1; r++){
-            j[r] = "x" + Integer.toString(r+1) + " = " + Double.toString(x[r]) + "\n";
+                j[r] = "x" + Integer.toString(r+1) + " = " + Double.toString(x.Matriks[0][r]) + "\n";
             }
         } else if (many){
             j = o.manySolution(m, j);
-
         } else if (no){
             j = null;
             System.out.println("Tidak ada solusi.\n");
         }
-        return matriks;
+        return x;
     }
+
 
 
 // 2. Metode Eliminasi Gauss-Jordan
