@@ -20,9 +20,10 @@ public class SPL {
         if (o.allColZero(m, c)){
             c++;
         }
-        while (c < m.nCols - 1 && r < m.nRows && !o.isEselonBaris(m)){
+        while (c < m.nCols && r < m.nRows && !o.isEselonBaris(m)){
             if (o.allRowZero(m, r)){
                 o.swapRow(m, r, m.nRows - 1);
+                m.displayMatriks();
             }
             if (o.allZeroUnder(m, r, c)){
                 c++;
@@ -31,21 +32,35 @@ public class SPL {
                 if (m.Matriks[r][c] != 0){
                     double x = m.Matriks[r][c];
                     o.convertOne(x, r, c, m);
+                } else {
+                    c = o.firstNoZeroRow(m, r);
+                    double x = m.Matriks[r][c];
+                    if (x != 0){
+                        o.convertOne(x, r, c, m);
+                    }
                 }
             }
             int b = r + 1;
             if (b < m.nRows && c < m.nCols){
+                if (m.Matriks[b][c] == 0){
+                    if (o.allZeroUnder(m, b, c)){
+                        c++;
+                    } else if (o.allRowZero(m, b)){
+                        o.swapRow(m, b, m.nRows - 1);
+                    } 
+                    else {
+                        b++;
+                    }
+                }if (b < m.nRows && c < m.nCols){
+                    int r1 = o.leadingOne(m, c);
+                    if (b == r1 && m.Matriks[b][c] == 1 && !o.allRowZero(m, b)){
+                        b++;
+                    }
+                }
+                
                 if (b == m.nRows - 1){
                     if (o.allRowZero(m, r)){
                         break;
-                    }
-                } else if (m.Matriks[b][c] == 0){
-                    if (o.allRowZero(m, r)){
-                        c++;
-                    } else if (o.allZeroUnder(m, b, c)){
-                        c++;
-                    } else {
-                        b++;
                     }
                 }
                 if (c == m.nCols - 1){
@@ -70,12 +85,12 @@ public class SPL {
                                 b++;
                             }
                         }
-                    }
+                    } 
                 } else {
-                    if (r < m.nRows && c < m.nCols){
-                        if (m.Matriks[r][c] != 0){
-                            double x = m.Matriks[r][c];
-                            o.convertOne(x, r, c, m);
+                    if (b < m.nRows && c < m.nCols){
+                        if (m.Matriks[b][c] != 0){
+                            double x = m.Matriks[b][c];
+                            o.convertOne(x, b, c, m);
                         }
                     }
                 }
