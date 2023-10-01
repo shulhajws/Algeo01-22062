@@ -131,6 +131,46 @@ public class SPL {
         return j;
     }
 
+    public double[] solveByGaussDouble(Matriks m){
+        Operations o = new Operations();
+        boolean no, many, one = false;
+        int b = m.nRows - 1;
+
+        toGauss(m);
+
+        if (o.allZeroBefore(m, b)){
+            no = true; many = false; one = false;
+        } else if (o.oneSolution(m)){
+            one = true; many = false; no = false;
+        } else if (o.allRowZero(m, b)){
+            many = true;no = false; one = false;
+        } else {
+            many = true; no = false; one = false;
+        }
+
+        double[] x; x = new double[999999];
+        String[] j; j = new String[999999];
+        
+        if (one){
+            for(int r = m.nCols - 2; r >= 0; r-- ){
+                x[r] = m.Matriks[r][m.nCols - 1];
+                for(int c = r + 1; c < m.nCols - 1; c++){
+                    x[r] = x[r] - m.Matriks[r][c] * x[r];
+                }
+            }
+            for(int r = 0; r < m.nCols - 1; r++){
+            j[r] = "x" + Integer.toString(r+1) + " = " + Double.toString(x[r]) + "\n";
+            }
+        } else if (many){
+            j = o.manySolution(m, j);
+
+        } else if (no){
+            j = null;
+            System.out.println("Tidak ada solusi.\n");
+        }
+        return x;
+    }
+
 
 // 2. Metode Eliminasi Gauss-Jordan
     /* Prosedur untuk mengubah matriks yang diberikan hingga terbentuk matriks Gauss-Jordan (eselon baris tereduksi) */
