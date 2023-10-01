@@ -90,7 +90,7 @@ public class SPL {
         }
     }
 
-    /*Memberikan solusi dari SPL */
+    /*Memberikan solusi dalam string dari SPL */
     public String[] solveByGauss(Matriks m){
         Operations o = new Operations();
         boolean no, many, one = false;
@@ -112,23 +112,77 @@ public class SPL {
         String[] j; j = new String[999999];
         
         if (one){
-            for(int r = m.nCols - 2; r >= 0; r-- ){
-                x[r] = m.Matriks[r][m.nCols - 1];
-                for(int c = r + 1; c < m.nCols - 1; c++){
-                    x[r] = x[r] - m.Matriks[r][c] * x[r];
+            int assign = 0;
+            for(int i = m.nRows - 1; i >= 0; i--){
+                double elmt = m.Matriks[i][m.nCols - 1];
+                int idx = m.nRows - 2 - i;
+                for(int k = i + 1; k < m.nRows; k++){
+                    elmt -= m.Matriks[i][k] * x[idx];
+                    idx -= 1;
                 }
+                x[assign] = elmt;
+                assign += 1;
             }
             for(int r = 0; r < m.nCols - 1; r++){
-            j[r] = "x" + Integer.toString(r+1) + " = " + Double.toString(x[r]) + "\n";
+                j[r] = "x" + Integer.toString(r+1) + " = " + Double.toString(x[r]) + "\n";
             }
         } else if (many){
             j = o.manySolution(m, j);
 
         } else if (no){
             j = null;
+
+
             System.out.println("Tidak ada solusi.\n");
         }
         return j;
+    }
+
+    public Matriks solveByGaussRegresi(Matriks m){
+        Operations o = new Operations();
+        boolean no, many, one = false;
+        int b = m.nRows - 1;
+
+        toGauss(m);
+        m.displayMatriks();
+
+        if (o.allZeroBefore(m, b)){
+            no = true; many = false; one = false;
+        } else if (o.oneSolution(m)){
+            one = true; many = false; no = false;
+        } else if (o.allRowZero(m, b)){
+            many = true;no = false; one = false;
+        } else {
+            many = true; no = false; one = false;
+        }
+
+        String[] j; j = new String[999999];
+        Matriks sol = new Matriks(1, m.nCols - 1);
+        
+        
+        if (one){
+            int assign = 0;
+            for(int i = m.nRows - 1; i >= 0; i--){
+                double x = m.Matriks[i][m.nCols - 1];
+                int idx = m.nRows - 2 - i;
+                for(int k = i + 1; k < m.nRows; k++){
+                    x -= m.Matriks[i][k] * sol.Matriks[0][idx];
+                    idx -= 1;
+                }
+                sol.Matriks[0][assign] = x;
+                assign += 1;
+            }
+            
+            for(int r = 0; r < m.nCols - 1; r++){
+                j[r] = "x" + Integer.toString(r+1) + " = " + Double.toString(sol.Matriks[0][r]) + "\n";
+            }
+        } else if (many){
+            j = o.manySolution(m, j);
+        } else if (no){
+            j = null;
+            System.out.println("Tidak ada solusi.\n");
+        }
+        return sol;
     }
 
 
@@ -158,6 +212,47 @@ public class SPL {
     }
 
     /*Memberikan solusi dari SPL */
+    public Matriks solveByGaussJordanR(Matriks m){
+        Operations o = new Operations();
+        boolean no, many, one = false;
+        int b = m.nRows - 1;
+
+        toGaussJordan(m);
+
+        // Mengecek kondisi matriks
+        if (o.allZeroBefore(m, b)){
+            no = true; many = false; one = false;
+        } else if (o.oneSolution(m)){
+            one = true; many = false; no = false;
+        } else if (o.allRowZero(m, b)){
+            many = true;no = false; one = false;
+        } else {
+            many = true; no = false; one = false;
+        }
+
+        // Inisialisasi solusi
+        String[] j; j = new String[999999];
+        
+        Matriks x = new Matriks(1, m.nCols - 1);
+        
+        // Sesuai kondisi matriks
+        if (one){
+            for(int r = m.nCols - 2; r >= 0; r-- ){
+                x.Matriks[0][r] = m.Matriks[r][m.nCols - 1];
+            }
+            for(int r = 0; r < m.nCols - 1; r++){
+                j[r] = "x" + Integer.toString(r+1) + " = " + Double.toString(x.Matriks[0][r]) + "\n";
+            }
+        } else if (many){
+            j = o.manySolution(m, j);
+
+        } else if (no){
+            j = null;
+            System.out.println("Tidak ada solusi.\n");
+        }
+        return x;
+    }
+
     public String[] solveByGaussJordan(Matriks m){
         Operations o = new Operations();
         boolean no, many, one = false;
@@ -186,7 +281,7 @@ public class SPL {
                 x[r] = m.Matriks[r][m.nCols - 1];
             }
             for(int r = 0; r < m.nCols - 1; r++){
-            j[r] = "x" + Integer.toString(r+1) + " = " + Double.toString(x[r]) + "\n";
+                j[r] = "x" + Integer.toString(r+1) + " = " + Double.toString(x[r]) + "\n";
             }
         } else if (many){
             j = o.manySolution(m, j);
@@ -251,7 +346,7 @@ public class SPL {
     /* Melakukan SPL dengan kaidah cramer. 
      * khusus untuk SPL dengan n peubah dan n persamaan
      * Solusi Cramer pastilah unik. */
-    public void Cramer(Matriks M){
+    public String[] Cramer(Matriks M){
         // Inisialisasi tempat simpan jawaban
         Determinant d = new Determinant();
         String[] jaw; jaw = new String[999999];
@@ -289,6 +384,7 @@ public class SPL {
                 jaw[j] = "x"+ Integer.toString(j+1) +" = " + Double.toString(detCramer/detOri) + "\n";
             }
         }   
+        return jaw;
     }
 
     public void changeColWithb(Matriks M, int i, Matriks b){
