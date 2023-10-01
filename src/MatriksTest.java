@@ -1,13 +1,17 @@
-import java.util.Scanner;
+// import java.util.Scanner;
 import java.io.FileNotFoundException;  // Import this class to handle errors
-import mylib.Matriks;
-import mylib.Operations;
-import mylib.SPL;
-import mylib.Invers;
+// import mylib.Matriks;
+// import mylib.Operations;
+// import mylib.SPL;
+// import mylib.Invers;
 // import mylib.Gauss;
+import mylib.Regresi;
 public class MatriksTest {
     
     public static void main(String[] args) throws FileNotFoundException{
+        Regresi reg = new Regresi();
+
+        reg.mlrEquation();
         // Test readMatriksFromFile
         // Matriks matrix1 = new Matriks(0,0);
         // ReadFile file = new ReadFile();
@@ -16,14 +20,14 @@ public class MatriksTest {
         // Scanner in = new Scanner(System.in);
         // AljabarLinear spl = new AljabarLinear();
 
-        System.out.print("Enter the number of rows for Matrix1: ");
-        int rows1 = in.nextInt();
-        System.out.print("Enter the number of columns for Matrix1: ");
-        int cols1 = in.nextInt();
-        Matriks matrix1 = new Matriks(rows1, cols1);
+        // System.out.print("Enter the number of rows for Matrix1: ");
+        // int rows1 = in.nextInt();
+        // System.out.print("Enter the number of columns for Matrix1: ");
+        // int cols1 = in.nextInt();
+        // Matriks matrix1 = new Matriks(rows1, cols1);
         
-        System.out.println("Enter values for Matrix1:");
-        matrix1.readMatriks(rows1, cols1);
+        // System.out.println("Enter values for Matrix1:");
+        // matrix1.readMatriks(rows1, cols1);
 
         // System.out.print("Enter the number of rows for Matrix2: ");
         // int rows2 = in.nextInt();
@@ -35,9 +39,9 @@ public class MatriksTest {
         // matrix2.readMatriks(rows2,cols2);
 
         //Test displayMatriks
-        System.out.println("Matrix1:");
-        matrix1.displayMatriks();
-        System.out.println("\n");
+        // System.out.println("Matrix1:");
+        // matrix1.displayMatriks();
+        // System.out.println("\n");
         
        
         // System.out.println("Matrix2:");
@@ -91,6 +95,6 @@ public class MatriksTest {
         // // Test determinant
         // System.out.println("Determinant of Matrix1: " + matrix1.determinant());
 
-        in.close();
+        // in.close();
     }
 }

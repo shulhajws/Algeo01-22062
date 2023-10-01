@@ -4,8 +4,9 @@ import java.util.Scanner;
 
 public class Regresi {
 
-    public void multilinearLinearRegression () {
+    public Matriks multipleLinearRegression () {
         Scanner input = new Scanner(System.in);
+        SPL spl = new SPL();
 
         System.out.print("Masukkan jumlah peubah x: ");
         int numOfVariable = input.nextInt();
@@ -76,5 +77,51 @@ public class Regresi {
         }
 
         regressionMatrix.displayMatriks();
+        return spl.solveByGaussRegresi(regressionMatrix);
+        // regressionMatrix.displayMatriks();
+        // double[] solution = spl.solveByGaussDouble(regressionMatrix);
+
+        // for (i = 0; i < numOfVariable; i++) {
+        //     System.out.println("solusi " + (i+1) + ": " + solution[i]);
+        // }
+    }
+
+    public void mlrEquation() {
+        Matriks solution = multipleLinearRegression();
+
+        System.out.println("Persamaan regresi linear berganda berdasarkan data tersebut adalah sebagai berikut:");
+        System.out.print("Y = ");
+
+        int i;
+        for (i = 0; i <= solution.getLastIdxCol(); i++) {
+            if (i == 0) {
+                System.out.print(solution.Matriks[0][i]);
+            } else {
+                if (solution.Matriks[0][i] >= 0) {
+                    System.out.print(" + " + solution.Matriks[0][i] + "X" + i);
+                } else {
+                    System.out.print(" - " + (solution.Matriks[0][i]*(-1)) + "X" + i);
+                }
+            }
+        }
+        System.out.println();
+    }
+
+    public void mlrEstimation() {
+        Matriks solution = multipleLinearRegression();
+        Scanner input = new Scanner(System.in);
+        Double y = solution.Matriks[0][0];
+
+        int i;
+        for (i = 1; i <= solution.getLastIdxCol(); i++) {
+            System.out.print("Masukkan nilai variabel peubah " + i + ": ");
+            Double x = input.nextDouble();
+            y += x*(solution.Matriks[0][i]);
+        }
+
+        input.close();
+
+        System.out.println("Estimasi nilai variabel terikat berdasarkan regresu linear berganda adalah: ");
+        System.err.println(y);
     }
 }
