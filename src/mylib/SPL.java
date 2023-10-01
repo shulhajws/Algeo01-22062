@@ -144,7 +144,6 @@ public class SPL {
         int b = m.nRows - 1;
 
         toGauss(m);
-        m.displayMatriks();
 
         if (o.allZeroBefore(m, b)){
             no = true; many = false; one = false;
