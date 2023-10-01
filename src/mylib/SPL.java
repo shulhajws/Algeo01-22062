@@ -251,7 +251,7 @@ public class SPL {
     /* Melakukan SPL dengan kaidah cramer. 
      * khusus untuk SPL dengan n peubah dan n persamaan
      * Solusi Cramer pastilah unik. */
-    public void Cramer(Matriks M){
+    public String[] Cramer(Matriks M){
         // Inisialisasi tempat simpan jawaban
         Determinant d = new Determinant();
         String[] jaw; jaw = new String[999999];
@@ -288,7 +288,8 @@ public class SPL {
                 //menampilkan solusi SPL
                 jaw[j] = "x"+ Integer.toString(j+1) +" = " + Double.toString(detCramer/detOri) + "\n";
             }
-        }   
+        }
+        return jaw;
     }
 
     public void changeColWithb(Matriks M, int i, Matriks b){
