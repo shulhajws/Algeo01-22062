@@ -1,18 +1,21 @@
 // import java.util.Scanner;
 import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.util.Scanner;
+
 import mylib.Matriks;
 // import mylib.Operations;
 // import mylib.SPL;
 // import mylib.Invers;
 // import mylib.Gauss;
 import mylib.Regresi;
+import mylib.SPL;
 public class MatriksTest {
     
     public static void main(String[] args) throws FileNotFoundException{
-        Regresi reg = new Regresi();
-        Matriks apani = reg.multipleLinearRegression();
-        reg.mlrEquation(apani);
-        reg.mlrEstimation(apani);
+        // Regresi reg = new Regresi();
+        // Matriks apani = reg.multipleLinearRegression();
+        // reg.mlrEquation(apani);
+        // reg.mlrEstimation(apani);
 
         // Test readMatriksFromFile
         // Matriks matrix1 = new Matriks(0,0);
@@ -97,6 +100,6 @@ public class MatriksTest {
         // // Test determinant
         // System.out.println("Determinant of Matrix1: " + matrix1.determinant());
 
-        // in.close();
+        in.close();
     }
 }
