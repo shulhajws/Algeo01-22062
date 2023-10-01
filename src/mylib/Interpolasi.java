@@ -44,23 +44,36 @@ public class Interpolasi {
                     }
                 }
             }
-            m.displayMatriks();
+
             Matriks mj = spl.solveByGaussRegresi(m);
-            mj.displayMatriks();
+
+            System.out.println("Persamaan polinom interpolasi berdasarkan data tersebut adalah sebagai berikut:");
+            System.out.print("f(X) = ");
+
+            int i, a = 0;
+            for (i = mj.getLastIdxCol(); i >= 0; i--) {
+                if (i == mj.getLastIdxCol()) {
+                    System.out.print(mj.Matriks[0][i]);
+                } else {
+                    if (mj.Matriks[0][i] >= 0) {
+                        System.out.print(" + " + mj.Matriks[0][i] + " X" + a);
+                    } else {
+                        System.out.print(" - " + (mj.Matriks[0][i]*(-1)) + " X" + a);
+                    }
+                }
+                a++;
+            }
+            System.out.println();
     
             int length = mj.nCols; 
             int p = 0;
             double hasil = 0;
-            for(int i = length - 1; i >= 0; i--){
+            for(i = length - 1; i >= 0; i--){
                 hasil += mj.Matriks[0][i] * Math.pow(I, p);
                 p += 1;
             }
             System.out.printf("Hasil: " + hasil);
-            
         }
-
         in.close();
     }
-    
-
 }

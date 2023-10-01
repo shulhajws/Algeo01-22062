@@ -79,7 +79,7 @@ public class Regresi {
 
     public void mlrEquation(Matriks solution) {
         System.out.println("Persamaan regresi linear berganda berdasarkan data tersebut adalah sebagai berikut:");
-        System.out.print("Y = ");
+        System.out.print("f(X) = ");
 
         int i, x = 0;
         for (i = solution.getLastIdxCol(); i >= 0; i--) {
