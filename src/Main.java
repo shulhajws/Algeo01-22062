@@ -6,6 +6,7 @@ public class Main {
         boolean programOn = true;
         int choice;
         Scanner in = new Scanner(System.in);
+        Determinant det = new Determinant();
         while(programOn){
             Util u = new Util();
             u.displayMenu();
@@ -60,24 +61,31 @@ public class Main {
                     u.displayMenuDet();
                     System.out.print("Operasi apa yang ingin kamu lakukan? (Masukkan pilihan menu dalam angka): ");
                     int choiceDet = in.nextInt();
-                    switch(choiceDet){
-                        case 1: //Reduksi Baris
-                            System.out.println("Program ini masih dalam tahap pengembangan");
-                            break;
-                        case 2: //Ekspansi Kofaktor
-                            System.out.print("Masukkan jumlah baris matriks: ");
-                            int nRows2 = in.nextInt();
-                            System.out.print("Masukkan jumlah kolom matriks: ");
-                            int nCols2 = in.nextInt();
-                            Matriks M2 = new Matriks(nRows2,nCols2);
-                            System.out.println("Masukkan nilai matriks: ");
-                            M2.readMatriks(nRows2,nCols2);
-                            // ----------------------
-                            System.out.println("Determinan matriks anda adalah: ");
-                            System.out.println(M2.determinantCofactor());
-                            break;
+                    System.out.print("Masukkan jumlah baris matriks: ");
+                    int nRows2 = in.nextInt();
+                    System.out.print("Masukkan jumlah kolom matriks: ");
+                    int nCols2 = in.nextInt();
+                    Matriks M2 = new Matriks(nRows2,nCols2);
+                    System.out.println("Masukkan nilai matriks: ");
+                    M2.readMatriks(nRows2,nCols2);
+
+                    if (!M2.isMatrixSquare()) {
+                        System.out.print("Matriks bukan merupakan matriks persegi. Determinan tidak dapat dihitung.");
+                        break;
+                    } else {
+                        switch(choiceDet){
+                            case 1: //Reduksi Baris
+                                System.out.println("Determinan matriks anda adalah: ");
+                                System.out.println(det.determinantByRowReduction(M2));
+                                break;
+                            case 2: //Ekspansi Kofaktor
+                                // ----------------------
+                                System.out.println("Determinan matriks anda adalah: ");
+                                System.out.println(det.determinantByCofactor(M2));
+                                break;
+                        }
+                        break;
                     }
-                    break;
                 case 3: //Invers
                     // System.out.print("Masukkan jumlah baris matriks: ");
                     // int nRows3 = in.nextInt();

@@ -87,6 +87,23 @@ public class Operations {
         return yes;
     }
 
+    public boolean allZeroBefore(Matriks m, int r){
+        int count = 0; boolean yes = false;
+        if (m.Matriks[r][m.nCols - 1] != 0){
+            for(int col = 0; col < m.nCols - 1; col++){
+                if (m.Matriks[r][col] == 0){
+                    count++;
+                }
+            }
+            if (count == m.nCols - 1){
+                yes = true;
+            }
+        } else {
+            yes = false;
+        }
+        return yes;
+    }
+
     public void swapRow(Matriks m, int r1, int r2){
         for(int c = 0; c < m.nCols; c++){
             double temp = m.Matriks[r1][c];
@@ -97,12 +114,23 @@ public class Operations {
 
     public int leadingOne(Matriks m, int c){
         int row1 = 0;
-        for(int i = 0; i < m.nRows; i++){
-            if (m.Matriks[i][c] == 1){
-                row1 = i;
-                break;
-            } else {
-                row1 = -1;
+        if (c > 0){
+            for(int i = 0; i < m.nRows; i++){
+                if (m.Matriks[i][c] == 1 && m.Matriks[i][c-1] == 0){
+                    row1 = i;
+                    break;
+                } else {
+                    row1 = -1;
+                }
+            }
+        } else {
+            for(int i = 0; i < m.nRows; i++){
+                if (m.Matriks[i][c] == 1){
+                    row1 = i;
+                    break;
+                } else {
+                    row1 = -1;
+                }
             }
         }
         return row1;
@@ -152,5 +180,134 @@ public class Operations {
         }
         return yes;
     }
+
+    public boolean isLowerTriangular (Matriks m) {
+        int i, j;
+
+        for (i = 0; i <= m.getLastIdxRow(); i++) {
+            for (j = i+1; j <= m.getLastIdxCol(); j++) {
+                if (m.Matriks[i][j] != 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean isUpperTriangular (Matriks m) {
+        int i, j;
+
+        for (j = 0; j <= m.getLastIdxRow(); j++) {
+            for (i = j+1; i <= m.getLastIdxCol(); i++) {
+                if (m.Matriks[i][j] != 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean noZeroInDiagonal (Matriks m) {
+        int i;
+
+        for (i = 0; i <= m.getLastIdxRow(); i++) {
+            if (m.Matriks[i][i] == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isProcessed (Matriks m) {
+        int i, j, count;
+
+        for (i = 0; i <= m.getLastIdxRow(); i++) {
+            count = 0;
+            for (j = 0; j <= m.getLastIdxCol(); j++) {
+                if (m.Matriks[i][j] == 0) {
+                    count++;
+                }
+            }
+            if (count == m.nCols) {
+                return false;
+            }
+        }
+
+        for (j = 0; j <= m.getLastIdxCol(); j++) {
+            count = 0;
+            for (i = 0; i <= m.getLastIdxRow(); i++) {
+                if (m.Matriks[i][j] == 0) {
+                    count++;
+                }
+            }
+            if (count == m.nRows) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public boolean oneSolution(Matriks m){
+        boolean yes = true;
+        if (m.nRows < m.nCols - 1){
+            yes = false;
+        }
+        if (yes){
+            for (int i = 0; i < m.nCols - 1; i++){
+                if (m.Matriks[i][i] != 1){
+                    yes = false;
+                } 
+            }
+        }
+        return yes;
+    }
+
+    public String[] manySolution(Matriks m, String[] j){
+        boolean[] proses = new boolean[m.nCols - 1];
+        char[] variabel = new char[m.nCols - 1];
+        int cur = 17;
+        for(int i = 0; i < m.nCols - 1; i++){
+            proses[i] = false;
+        } 
+        for(int a = 0; a < m.nRows; a++){
+            for(int c = a; c < m.nCols - 1; c++){
+                if(m.Matriks[a][c] == 1){
+                    proses[c] = true;
+                    String temp = "";
+                    if(Math.abs(m.Matriks[a][m.nCols - 1]) > 1e-8){
+                        temp += Double.toString(m.Matriks[a][m.nCols - 1]);
+                    }
+                    for(int k = c + 1; k < m.nCols - 1; k++){
+                        if(Math.abs(m.Matriks[a][k]) > 1e-8){
+                            if(!proses[k]){
+                                proses[k] = true;
+                                variabel[k] = (char)(97+cur);
+                                j[k] = "x" + Integer.toString(k+1) + " = " + Character.toString(variabel[k]) + "\n";
+                                cur = (cur+1)%26;
+                            }
+                            if(m.Matriks[a][k] > 0) {
+                                temp += (temp.length() == 0 ? "" : " - ") + (Math.abs(m.Matriks[a][k]) != 1.0 ? Double.toString(Math.abs(m.Matriks[a][k])) : "") + Character.toString(variabel[k]);
+                            } else {
+                                temp += (temp.length() == 0 ? "" : " + ") + (Math.abs(m.Matriks[a][k]) != 1.0 ? Double.toString(Math.abs(m.Matriks[a][k])) : "") + Character.toString(variabel[k]);
+                            }    
+                        }
+                    }
+                    j[c] = "x" + Integer.toString(c+1) + " = " + temp + "\n";
+                    break;
+                } else {
+                    if(!proses[c]){
+                        proses[c] = true;
+                        variabel[c] = (char)(97+cur);
+                        j[c] = "x" + Integer.toString(c+1) + " = " + Character.toString(variabel[c]) + "\n";
+                        cur = (cur+1)%26;
+                    }
+                }
+            }
+        }
+        return j;
+    }
+
 }
+
 
