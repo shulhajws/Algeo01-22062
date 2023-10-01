@@ -131,7 +131,7 @@ public class SPL {
         return j;
     }
 
-    public Matriks solveByGaussDouble(Matriks m){
+    public Matriks solveByGaussRegresi(Matriks m){
         Operations o = new Operations();
         boolean no, many, one = false;
         int b = m.nRows - 1;
