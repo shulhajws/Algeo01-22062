@@ -23,7 +23,6 @@ public class SPL {
         while (c < m.nCols && r < m.nRows && !o.isEselonBaris(m)){
             if (o.allRowZero(m, r)){
                 o.swapRow(m, r, m.nRows - 1);
-                m.displayMatriks();
             }
             if (o.allZeroUnder(m, r, c)){
                 c++;
