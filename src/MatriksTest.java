@@ -1,36 +1,75 @@
 // import java.util.Scanner;
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.Scanner;
-import mylib.*;
-import mylib.Bicubic;
-import mylib.Matriks;
+
 // import mylib.Operations;
 // import mylib.SPL;
 // import mylib.Invers;
 // import mylib.Gauss;
-import mylib.Regresi;
-import mylib.SPL;
+import mylib.*;
 public class MatriksTest {
     
     public static void main(String[] args) throws FileNotFoundException{
         Bicubic bic = new Bicubic();
         Invers inv = new Invers();
-
-        Matriks matrix1 = new Matriks(4, 4);
+        // Determinant det = new Determinant();
+        // Matriks matrix1 = new Matriks(4, 4);
+        // SPL spl = new SPL();
         
+        // System.out.println("Enter values for Matrix1:");
+        // matrix1.readMatriks(4, 4);
+        // matrix1.displayMatriks();
+        // System.out.println("----------------------------------");
+
+        // (inv.inversByGaussJordan(matrix1)).displayMatriks();
+        // Scanner in = new Scanner(System.in);
+        // System.out.println("----------------------------------");
+        // System.out.print("Enter the number of rows for Matrix1: ");
+        // int rows1 = in.nextInt();
+        // System.out.print("Enter the number of columns for Matrix1: ");
+        // int cols1 = in.nextInt();
+        // Matriks matrix1 = new Matriks(rows1, cols1);
+        
+        // System.out.println("Enter values for Matrix1:");
+        // matrix1.readMatriks(rows1, cols1);
+
+        // Matriks proses = new Matriks(rows1, cols1*2);
+        //     for(int b = 0; b < rows1; b++){
+        //         for(int k = 0; k < cols1; k++){
+        //             proses.Matriks[b][k] = matrix1.Matriks[b][k];
+        //         }
+        //     }
+        //     for(int b = 0; b < rows1; b++){
+        //         for(int k = cols1; k < cols1*2; k++){
+        //             if (k - b == rows1){
+        //                 proses.Matriks[b][k] = 1;
+        //             } else {
+        //                 proses.Matriks[b][k] = 0;
+        //             }
+        //         }
+        //     }
+        Matriks f = new Matriks(4,4);
         System.out.println("Enter values for Matrix1:");
-        matrix1.readMatriks(4, 4);
-        matrix1.displayMatriks();
+        f.readMatriks(4, 4);
+        f.displayMatriks();
         System.out.println("----------------------------------");
 
-        (inv.inversByGaussJordan(matrix1)).displayMatriks();
-        System.out.println("----------------------------------");
+        // Matriks X = bic.makeMatriksX();
+        // X.displayMatriks();
+        // System.out.println("----------------------------------");
+        // (inv.inversByGaussJordan(X)).displayMatriks();
+        double result=bic.bicubicResult(f, 0.3, 0.4);
+        System.out.println(result);
+        // proses.displayMatriks();
+        // System.out.println("\n");
 
-        Matriks X = bic.makeMatriksX();
-        X.displayMatriks();
-        System.out.println("----------------------------------");
-        Matriks xInvers = inv.inversMatriks(X);
-        xInvers.displayMatriks();
+        // System.out.println("----------------------------------");
+        // spl.toGaussJordan(matrix1);
+        // matrix1.displayMatriks();
+        // System.out.println("Determinan:"+det.determinantByRowReduction(X));
+        
+        // Matriks xInvers = inv.inversByGaussJordan(X);
+        // xInvers.displayMatriks();
         // Regresi reg = new Regresi();
         // Matriks apani = reg.multipleLinearRegression();
         // reg.mlrEquation(apani);
@@ -44,14 +83,7 @@ public class MatriksTest {
         // Scanner in = new Scanner(System.in);
         // AljabarLinear spl = new AljabarLinear();
 
-        // System.out.print("Enter the number of rows for Matrix1: ");
-        // int rows1 = in.nextInt();
-        // System.out.print("Enter the number of columns for Matrix1: ");
-        // int cols1 = in.nextInt();
-        // Matriks matrix1 = new Matriks(rows1, cols1);
         
-        // System.out.println("Enter values for Matrix1:");
-        // matrix1.readMatriks(rows1, cols1);
 
         // System.out.print("Enter the number of rows for Matrix2: ");
         // int rows2 = in.nextInt();

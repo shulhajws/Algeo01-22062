@@ -35,9 +35,8 @@ public class Operations {
         return true;       
     }
 
-    
-    public void convertOne(double x, int r, int c, Matriks m){
-        for(int k = c; k < m.nCols; k++){
+    public void convertOne(double x, int r, Matriks m){
+        for(int k = 0; k < m.nCols; k++){
             m.Matriks[r][k] = m.Matriks[r][k] / x;
         }
     }
@@ -112,7 +111,7 @@ public class Operations {
         }
     }
 
-    public int leadingOne(Matriks m, int c){
+    public int leadingOneRow(Matriks m, int c){
         int row1 = 0;
         if (c > 0){
             for(int i = 0; i < m.nRows; i++){
@@ -134,6 +133,20 @@ public class Operations {
             }
         }
         return row1;
+    }
+
+    public int leadingOneCol(Matriks m, int r){
+        int col1 = 0;
+        boolean found = false;
+        while(col1 < m.nCols && !found){
+            if (m.Matriks[r][col1] != 0){
+                found = true;
+            } else {
+                col1++;
+            }
+        }
+        
+        return col1;
     }
 
     public int firstNoZeroRow(Matriks m, int r){
@@ -171,7 +184,7 @@ public class Operations {
 
     public boolean inversible(Matriks m){
         boolean yes = true;
-        double det = d.determinantByCofactor(m);
+        double det = d.determinantByRowReduction(m);
         if (det == 0){
             System.out.println("Tidak memilikin matriks balikan!\n");
             yes = false;

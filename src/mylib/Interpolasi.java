@@ -45,7 +45,7 @@ public class Interpolasi {
                 }
             }
 
-            Matriks mj = spl.solveByGaussRegresi(m);
+            Matriks mj = spl.solveByGaussResult(m);
 
             System.out.println("Persamaan polinom interpolasi berdasarkan data tersebut adalah sebagai berikut:");
             System.out.print("f(X) = ");

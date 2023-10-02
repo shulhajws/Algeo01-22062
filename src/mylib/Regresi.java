@@ -74,7 +74,7 @@ public class Regresi {
             }
         }
 
-        return spl.solveByGaussRegresi(regressionMatrix);
+        return spl.solveByGaussResult(regressionMatrix);
     }
 
     public void mlrEquation(Matriks solution) {

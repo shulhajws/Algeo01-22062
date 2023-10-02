@@ -55,7 +55,6 @@ public class Invers {
             }
             spl.toGaussJordan(proses);
 
-            
             for(int b = 0; b < rows1; b++){
                 for(int k = 0; k < cols1; k++){
                     balikan.Matriks[b][k] = proses.Matriks[b][k + rows1];

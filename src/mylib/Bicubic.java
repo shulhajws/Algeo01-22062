@@ -80,13 +80,14 @@ public class Bicubic {
     public double bicubicResult(Matriks f, double xt, double yt){
         Invers inv = new Invers();
 
-        Matriks xInvers = inv.inversMatriks(makeMatriksX());
+        Matriks xInvers = inv.inversByGaussJordan(makeMatriksX());
         Matriks koef = xInvers.multiplyMatriks(convertMatriksBic(f));
-        int i,j;
+        int i,j,k=0;
         double result=0;
         for(j=0;j<4;j++){
             for(i=0;i<4;i++){
-                result += koef.Matriks[i][j]*Math.pow(xt,i)*Math.pow(yt,j);
+                result += koef.Matriks[k][0]*Math.pow(xt,i)*Math.pow(yt,j);
+                k++;
             }
         }
         return result;
