@@ -89,7 +89,7 @@ public class Regresi {
                 if (solution.Matriks[0][i] >= 0) {
                     System.out.print(" + " + solution.Matriks[0][i] + " X" + x);
                 } else {
-                    System.out.print(" - " + (solution.Matriks[0][i]*(-1)) + " X" + x);
+                    System.out.print(" - " + ((solution.Matriks[0][i])*(-1)) + " X" + x);
                 }
             }
             x++;
