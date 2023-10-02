@@ -53,29 +53,31 @@ public class Determinant {
 
                 return determinant;
             } else {
-                int i, j, swapCount = 0;
-
-                while (!op.noZeroInDiagonal(m)) {
-                    for (j = 0; j <= m.getLastIdxCol(); j++) {
-                        if (m.Matriks[j][j] == 0) {
-                            i = j;
-
-                            while (i <= m.getLastIdxRow() && m.Matriks[i][j] == 0) {
-                                i++;
-                            }
-
-                            if (i > m.getLastIdxRow()) {
-                                return 0;
-                            }
-                            
-                            op.swapRow(m, j, i);
-                            swapCount++;
-                        }
-                    }
-                }
-                int k; double reductor;
+                int i, j, k, idx, swapCount = 0; double reductor;
 
                 for (j = 0; j <= m.getLastIdxCol(); j++) {
+                    if (m.Matriks[j][j] == 0) {
+                        idx = j;
+                        int iteration = 0;
+
+                        while (iteration < m.nRows-1 && m.Matriks[idx][j] == 0) {
+                            if (idx == m.getLastIdxRow()) {
+                                idx = 0;
+                            } else {
+                                idx++;
+                            }
+                            iteration++;
+                        }
+
+                        if (iteration == m.nRows) {
+                            return 0;
+                        }
+                        
+                        op.swapRow(m, j, idx);
+                        swapCount++;
+                        
+                    }
+
                     for (i = j+1; i <= m.getLastIdxRow(); i++) {
                         if (m.Matriks[i][j] != 0) {
                             reductor = m.Matriks[i][j]/m.Matriks[j][j];
@@ -83,7 +85,7 @@ public class Determinant {
                                 m.Matriks[i][k] -= m.Matriks[j][k]*reductor;
                             }
                         }
-                    }
+                    }    
                 }
 
                 double determinant = 1;

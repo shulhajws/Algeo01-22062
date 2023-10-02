@@ -74,12 +74,12 @@ public class Regresi {
             }
         }
 
-        return spl.solveByGaussRegresi(regressionMatrix);
+        return spl.solveByGaussResult(regressionMatrix);
     }
 
     public void mlrEquation(Matriks solution) {
         System.out.println("Persamaan regresi linear berganda berdasarkan data tersebut adalah sebagai berikut:");
-        System.out.print("Y = ");
+        System.out.print("f(X) = ");
 
         int i, x = 0;
         for (i = solution.getLastIdxCol(); i >= 0; i--) {
@@ -89,7 +89,7 @@ public class Regresi {
                 if (solution.Matriks[0][i] >= 0) {
                     System.out.print(" + " + solution.Matriks[0][i] + " X" + x);
                 } else {
-                    System.out.print(" - " + (solution.Matriks[0][i]*(-1)) + " X" + x);
+                    System.out.print(" - " + ((solution.Matriks[0][i])*(-1)) + " X" + x);
                 }
             }
             x++;

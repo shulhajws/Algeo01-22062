@@ -23,13 +23,12 @@ public class Invers {
     }
 
     public Matriks inversMatriks(Matriks M){
-        Invers I = new Invers();
-        double det = d.determinantByCofactor(M);
+        double det = d.determinantByRowReduction(M);
         if(det==0){
             System.out.println("Matriks tidak memiliki invers");
             return null;
         } else {
-            return I.matriksAdjoin(M).multiplyByConst(1/det);
+            return matriksAdjoin(M).multiplyByConst(1/det);
         }
     }
 
@@ -56,7 +55,6 @@ public class Invers {
             }
             spl.toGaussJordan(proses);
 
-            
             for(int b = 0; b < rows1; b++){
                 for(int k = 0; k < cols1; k++){
                     balikan.Matriks[b][k] = proses.Matriks[b][k + rows1];
