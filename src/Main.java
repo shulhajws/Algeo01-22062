@@ -166,7 +166,7 @@ public class Main {
                         M3.readMatriks(nRows, nCols);
                     } else { //Read from File
                         System.out.println("Masukkan matriks yang kamu ingin cari inversnya");
-                        System.out.print("Masukkan nama file input dengan forma namafile.txt");
+                        System.out.print("Masukkan nama file input dengan format namafile.txt");
                         String fileNameString = in.nextLine();
                         String filePath = "../lib/"+fileNameString;
                         M3 = rf.readMatriksFromFile(filePath);
@@ -207,11 +207,20 @@ public class Main {
                         System.out.printf("Value x yang akan ditaksir: ");
                         I = in.nextDouble();
                     } else {//Read from File
-                        System.out.printf("ntar ");
+                        System.out.print("Masukkan file text dengan format beberapa titik x y dan nilai yang akan ditaksir");
+                        System.out.print("Masukkan nama file input dengan format namafile.txt");
+                        String fileNameString = in.nextLine();
+                        String filePath = "../lib/"+fileNameString;
+                        Matriks M4 = rf.readMatriksFromFile(filePath);
+                        nt=M4.nRows-1;
+                        x = rf.getXforIpol(M4);
+                        y = rf.getYforIpol(M4);
+                        I = rf.getXUntukDitebak(M4);
                     }
 
                     if(choiceOutput==1){ //Output to Keyboard
                         ipol.solveByInterpolasi(x, y, I, nt);
+                        System.out.println();
                     } else { //Output to File
                         System.out.println("Program ini masih dalam tahap pengembangan");
                     };
@@ -227,9 +236,9 @@ public class Main {
                         M5 = new Matriks(4,4);
                         M5.readMatriks(4, 4);
                         System.out.print("Masukkan absis titik yang ingin kita cari: ");
-                        xbic = in.nextInt();
-                        System.out.print("Masukkan ordinat titik yang ingin kita cari:");
-                        ybic = in.nextInt();
+                        xbic = in.nextDouble();
+                        System.out.print("Masukkan ordinat titik yang ingin kita cari: ");
+                        ybic = in.nextDouble();
                     } else { //Read from File
                         System.out.println("Masukkan matriks 4x4 beserta titik yang kamu ingin cari nilainya");
                         System.out.print("Masukkan nama file input dengan format namafile.txt");
@@ -246,21 +255,31 @@ public class Main {
                         System.out.print("Hasil dari petaan bicubic spline nya adalah ");
                         double result = bic.bicubicResult(M5, xbic, ybic);
                         System.out.print(result);
+                        System.out.print("\n");
                     } else { //Output to File
                         System.out.println("Program ini masih dalam tahap pengembangan");
                     }
                     break;
 
                 case 6: //Regresi Linear Berganda
-                    Matriks resultReg; int numOfData, numOfVariable;
+                    Matriks resultReg, dataMatrix, untukDitaksir; int numOfData, numOfVariable;
                     if(choiceInput==1){ //Input Keyboard
                         System.out.print("Masukkan jumlah peubah x: ");
                         numOfVariable = in.nextInt();
                         System.out.print("Masukkan jumlah data: ");
                         numOfData = in.nextInt();
-                        Matriks dataMatrix = new Matriks(numOfData, numOfVariable+1);
+                        dataMatrix = new Matriks(numOfData, numOfVariable+1);
+                        dataMatrix.readMatriks(numOfData, numOfVariable+1);
                         
                         resultReg = reg.multipleLinearRegression(numOfVariable, numOfData, dataMatrix);
+
+                        untukDitaksir = new Matriks(1, numOfVariable);
+                        int p=1;
+                        for(int j=0;j<untukDitaksir.nCols;j++){
+                            System.out.print("Masukkan nilai variabel peubah " + p + ": ");
+                            untukDitaksir.Matriks[0][j]=in.nextDouble();
+                            p++;
+                        }
                     } else { //Input File
                         System.out.println("Masukkan nilai nilai regresi linear dalam bentuk matriks");
                         System.out.print("Masukkan nama file input dengan format namafile.txt");
@@ -269,12 +288,15 @@ public class Main {
                         Matriks M6fromFile = rf.readMatriksFromFile(filePath);
                         numOfVariable=(M6fromFile.nCols)-1;
                         numOfData=(M6fromFile.nRows)-1;
-                        Matriks dataMatrix = new Matriks(numOfData, numOfVariable+1);
+                        dataMatrix = new Matriks(numOfData, numOfVariable+1);
+                        dataMatrix = rf.getMatriks(M6fromFile);
                         resultReg = reg.multipleLinearRegression(numOfVariable, numOfData, dataMatrix);
+                        untukDitaksir = rf.getLastLineMatriks(M6fromFile);
                     }
 
                     if(choiceOutput==1){
-
+                        reg.mlrEquation(resultReg);
+                        reg.mlrEstimation(resultReg,untukDitaksir);
                     } else {
 
                     }

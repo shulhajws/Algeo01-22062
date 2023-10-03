@@ -70,11 +70,31 @@ public class ReadFile {
         return Mat;
     }
 
-    public Matriks getXforIpol(){
-        
+    public double[] getXforIpol(Matriks M){
+        double[] Mat = new double[999999];
+        for(int i=0;i<M.nRows-1;i++){
+            Mat[i]=M.Matriks[i][0];
+        }
+        return Mat;
+        // Matriks Mat = new Matriks(M.nRows-1,1);
+        // for(int i=0;i<Mat.nRows;i++){
+        //     Mat.Matriks[i][0]=M.Matriks[i][0];
+        // }
+        // return Mat;
     }
 
-    public Matriks getYforIpol(){
-
+    public double[] getYforIpol(Matriks M){
+        double[] Mat = new double[999999];
+        for(int i=0;i<M.nRows-1;i++){
+            Mat[i]=M.Matriks[i][1];
+        }
+        return Mat;
+        // Matriks Mat = new Matriks(M.nRows-1,1);
+        // for(int i=0;i<Mat.nRows;i++){
+        //     Mat.Matriks[i][0]=M.Matriks[i][1];
+        // }
+        // return Mat;
     }
+
+    
 }
