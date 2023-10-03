@@ -35,8 +35,9 @@ public class Operations {
         return true;       
     }
 
-    public void convertOne(double x, int r, Matriks m){
-        for(int k = 0; k < m.nCols; k++){
+    
+    public void convertOne(double x, int r, int c, Matriks m){
+        for(int k = c; k < m.nCols; k++){
             m.Matriks[r][k] = m.Matriks[r][k] / x;
         }
     }
@@ -111,42 +112,21 @@ public class Operations {
         }
     }
 
-    public int leadingOneRow(Matriks m, int c){
+    public int leadingOne(Matriks m, int c){
         int row1 = 0;
-        if (c > 0){
-            for(int i = 0; i < m.nRows; i++){
-                if (m.Matriks[i][c] == 1 && m.Matriks[i][c-1] == 0){
-                    row1 = i;
-                    break;
-                } else {
-                    row1 = -1;
-                }
-            }
-        } else {
-            for(int i = 0; i < m.nRows; i++){
-                if (m.Matriks[i][c] == 1){
-                    row1 = i;
-                    break;
-                } else {
-                    row1 = -1;
-                }
+        if (c == -1){
+            row1 = m.nRows;
+        }
+        
+        for(int i = 0; i < m.nRows; i++){
+            if (m.Matriks[i][c] == 1 &&  c == firstNoZeroRow(m, i)){
+                row1 = i;
+                break;
+            } else {
+                row1 = -1;
             }
         }
         return row1;
-    }
-
-    public int leadingOneCol(Matriks m, int r){
-        int col1 = 0;
-        boolean found = false;
-        while(col1 < m.nCols && !found){
-            if (m.Matriks[r][col1] != 0){
-                found = true;
-            } else {
-                col1++;
-            }
-        }
-        
-        return col1;
     }
 
     public int firstNoZeroRow(Matriks m, int r){
@@ -179,7 +159,7 @@ public class Operations {
     }
 
     public boolean indented(Matriks m, int r, int c){
-        return (c > firstNoZeroRow(m, r));
+        return (c > firstNoZeroRow(m, r - 1));
     }
 
     public boolean inversible(Matriks m){
@@ -319,6 +299,20 @@ public class Operations {
             }
         }
         return j;
+    }
+
+    public Matriks concatMatriksSPL(Matriks A, Matriks b){
+        Matriks MCopy = new Matriks(A.nRows,A.nCols+1);
+        for(int i=0;i<A.nRows;i++){
+            for(int j=0;j<A.nCols;j++){
+                MCopy.Matriks[i][j]=A.Matriks[i][j];
+            }
+        }
+        for(int k=0;k<b.nRows;k++){
+            MCopy.Matriks[k][MCopy.getLastIdxCol()]=b.Matriks[k][0];
+
+        }
+        return MCopy;
     }
 
 }
