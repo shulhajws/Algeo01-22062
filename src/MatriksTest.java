@@ -10,8 +10,18 @@ import mylib.*;
 public class MatriksTest {
     
     public static void main(String[] args) throws FileNotFoundException{
-        Bicubic bic = new Bicubic();
-        Invers inv = new Invers();
+        ReadFile rf = new ReadFile();
+        Scanner in = new Scanner(System.in);
+        int lala = in.nextInt();
+        System.out.println(lala);
+        in.nextLine();
+        String fileNameString = in.nextLine();
+        String filePath = "../lib/testfile/"+fileNameString;
+        Matriks M1 = rf.readMatriksFromFile(filePath);
+        M1.displayMatriks();
+        in.close();
+        // Bicubic bic = new Bicubic();
+        // Invers inv = new Invers();
         // Determinant det = new Determinant();
         // Matriks matrix1 = new Matriks(4, 4);
         // SPL spl = new SPL();
@@ -48,18 +58,18 @@ public class MatriksTest {
         //             }
         //         }
         //     }
-        Matriks f = new Matriks(4,4);
-        System.out.println("Enter values for Matrix1:");
-        f.readMatriks(4, 4);
-        f.displayMatriks();
-        System.out.println("----------------------------------");
+        // Matriks f = new Matriks(4,4);
+        // System.out.println("Enter values for Matrix1:");
+        // f.readMatriks(4, 4);
+        // f.displayMatriks();
+        // System.out.println("----------------------------------");
 
         // Matriks X = bic.makeMatriksX();
         // X.displayMatriks();
         // System.out.println("----------------------------------");
         // (inv.inversByGaussJordan(X)).displayMatriks();
-        double result=bic.bicubicResult(f, 0.3, 0.4);
-        System.out.println(result);
+        // double result=bic.bicubicResult(f, 0.3, 0.4);
+        // System.out.println(result);
         // proses.displayMatriks();
         // System.out.println("\n");
 

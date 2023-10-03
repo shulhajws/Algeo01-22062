@@ -47,10 +47,12 @@ public class Main {
                         M1 = o.concatMatriksSPL(A, b);
                         
                     } else { //Read from File
-                        System.out.print("Masukkan SPL yang ingin kamu selesaikan dalam bentuk matriks augmented:");
-                        System.out.print("Masukkan nama file input dengan forma namafile.txt");
+                        System.out.println("Masukkan SPL yang ingin kamu selesaikan dalam bentuk matriks augmented:");
+                        System.out.print("Masukkan nama file input dengan format namafile.txt: ");
+                        in.nextLine();
                         String fileNameString = in.nextLine();
-                        String filePath = "../lib/"+fileNameString;
+                        System.out.println(fileNameString);
+                        String filePath = "../lib/testfile/"+fileNameString;
                         M1 = rf.readMatriksFromFile(filePath);
                     }
 
@@ -124,8 +126,9 @@ public class Main {
                     } else { //Read from File
                         System.out.print("Masukkan matriks yang kamu ingin cari determinannya");
                         System.out.print("Masukkan nama file input dengan forma namafile.txt");
+                        in.nextLine();
                         String fileNameString = in.nextLine();
-                        String filePath = "../lib/"+fileNameString;
+                        String filePath = "../lib/testfile/"+fileNameString;
                         M2 = rf.readMatriksFromFile(filePath);
                     };
 
@@ -167,8 +170,9 @@ public class Main {
                     } else { //Read from File
                         System.out.println("Masukkan matriks yang kamu ingin cari inversnya");
                         System.out.print("Masukkan nama file input dengan format namafile.txt");
+                        in.nextLine();
                         String fileNameString = in.nextLine();
-                        String filePath = "../lib/"+fileNameString;
+                        String filePath = "../lib/testfile/"+fileNameString;
                         M3 = rf.readMatriksFromFile(filePath);
                     };
 
@@ -209,8 +213,9 @@ public class Main {
                     } else {//Read from File
                         System.out.print("Masukkan file text dengan format beberapa titik x y dan nilai yang akan ditaksir");
                         System.out.print("Masukkan nama file input dengan format namafile.txt");
+                        in.nextLine();
                         String fileNameString = in.nextLine();
-                        String filePath = "../lib/"+fileNameString;
+                        String filePath = "../lib/testfile/"+ fileNameString;
                         Matriks M4 = rf.readMatriksFromFile(filePath);
                         nt=M4.nRows-1;
                         x = rf.getXforIpol(M4);
@@ -242,8 +247,9 @@ public class Main {
                     } else { //Read from File
                         System.out.println("Masukkan matriks 4x4 beserta titik yang kamu ingin cari nilainya");
                         System.out.print("Masukkan nama file input dengan format namafile.txt");
+                        in.nextLine();
                         String fileNameString = in.nextLine();
-                        String filePath = "../lib/"+fileNameString;
+                        String filePath = "../lib/testfile/" + fileNameString;
                         Matriks M5fromFile = rf.readMatriksFromFile(filePath);
                         M5 = rf.getMatriks(M5fromFile);
                         Matriks M5Titik = rf.getXYUntukDitebak(M5);
@@ -282,9 +288,10 @@ public class Main {
                         }
                     } else { //Input File
                         System.out.println("Masukkan nilai nilai regresi linear dalam bentuk matriks");
-                        System.out.print("Masukkan nama file input dengan format namafile.txt");
+                        System.out.print("Masukkan nama file input dengan format namafile.txt: ");
+                        in.nextLine();
                         String fileNameString = in.nextLine();
-                        String filePath = "../lib/"+fileNameString;
+                        String filePath = "../lib/testfile/" + fileNameString;
                         Matriks M6fromFile = rf.readMatriksFromFile(filePath);
                         numOfVariable=(M6fromFile.nCols)-1;
                         numOfData=(M6fromFile.nRows)-1;
@@ -292,6 +299,7 @@ public class Main {
                         dataMatrix = rf.getMatriks(M6fromFile);
                         resultReg = reg.multipleLinearRegression(numOfVariable, numOfData, dataMatrix);
                         untukDitaksir = rf.getLastLineMatriks(M6fromFile);
+                        untukDitaksir.displayMatriks();
                     }
 
                     if(choiceOutput==1){

@@ -1,7 +1,4 @@
 package mylib;
-import java.util.Scanner;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 
 public class Interpolasi {
     public void solveByInterpolasi(double[] x, double[] y, double I, int nt){

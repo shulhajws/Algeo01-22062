@@ -73,7 +73,7 @@ public class Regresi {
                 }
             }
         }
-
+        regressionMatrix.displayMatriks();
         return spl.solveByGaussResult(regressionMatrix);
     }
 
@@ -107,9 +107,11 @@ public class Regresi {
         //     y += x*(solution.Matriks[0][i]);
         //     p++;
         // }
-
-        for (int i = untukDitaksir.getLastIdxCol(); i >= 0; i--) {
-            y += untukDitaksir.Matriks[0][i]*(solution.Matriks[0][i]);
+        
+        int j = 0;
+        for (int i = solution.getLastIdxCol()-1; i >= 0; i--) {
+            y += untukDitaksir.Matriks[0][j]*(solution.Matriks[0][i]);
+            j++;
         }
         System.out.println("Estimasi nilai variabel terikat berdasarkan regresi linear berganda adalah: ");
         System.out.println(y);
