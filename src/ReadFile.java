@@ -4,29 +4,21 @@ import java.util.Scanner; // Import the Scanner class to read text files
 import mylib.*;
 
 public class ReadFile {
+
     public Matriks readMatriksFromFile(String filePath) throws FileNotFoundException{
         try {
             File text = new File(filePath);
             Scanner fReader = new Scanner(text);
-            //Ngitung Baris dan Kolom
             int nRows=0, nCols=0;
-            boolean countCol = true;
             while (fReader.hasNextLine()) {
-                nRows++;
-                
-                Scanner colReader = new Scanner(fReader.nextLine());
-                // System.out.println(countCol);
-                // System.out.println(colReader.hasNextDouble());
-                while (countCol && colReader.hasNextDouble()){
-                    System.out.println("msk kh banh");
-                    nCols++;
-                    colReader.nextDouble();  
-                    System.out.println(nCols);            
-                }
-                countCol = false;
-                
+              nRows++;
+              Scanner colReader = new Scanner(fReader.nextLine());
+              while (colReader.hasNextDouble()){
+                  nCols++;
+                  colReader.nextDouble();              
+              }
             }
-            // System.out.println("Jumlah kolom"+nCols);
+            nCols = nCols/nRows;
             Matriks M = new Matriks(nRows,nCols);
             fReader.close();
 
@@ -69,5 +61,20 @@ public class ReadFile {
         Mat.Matriks[0][1]=M.Matriks[M.getLastIdxRow()][1];
         return Mat; 
     }
-    
+
+    public Matriks getLastLineMatriks(Matriks M){
+        Matriks Mat = new Matriks(1,M.nCols-1);
+        for(int j=0;j<Mat.nCols;j++){
+            Mat.Matriks[0][j]=M.Matriks[M.getLastIdxRow()][j];
+        }
+        return Mat;
+    }
+
+    public Matriks getXforIpol(){
+        
+    }
+
+    public Matriks getYforIpol(){
+
+    }
 }

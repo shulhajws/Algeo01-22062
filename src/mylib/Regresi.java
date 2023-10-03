@@ -4,17 +4,17 @@ import java.util.Scanner;
 
 public class Regresi {
     Scanner input = new Scanner(System.in);
-    public Matriks multipleLinearRegression () {
+    public Matriks multipleLinearRegression (int numOfVariable,int numOfData, Matriks dataMatrix ) {
         SPL spl = new SPL();
 
-        System.out.print("Masukkan jumlah peubah x: ");
-        int numOfVariable = input.nextInt();
+        // System.out.print("Masukkan jumlah peubah x: ");
+        // int numOfVariable = input.nextInt();
 
-        System.out.print("Masukkan jumlah data: ");
-        int numOfData = input.nextInt();
+        // System.out.print("Masukkan jumlah data: ");
+        // int numOfData = input.nextInt();
 
         Matriks regressionMatrix = new Matriks(numOfVariable+1, numOfVariable+2);
-        Matriks dataMatrix = new Matriks(numOfData, numOfVariable+1);
+        // Matriks dataMatrix = new Matriks(numOfData, numOfVariable+1);
 
         int i;
         System.out.print("y");
@@ -74,12 +74,12 @@ public class Regresi {
             }
         }
 
-        return spl.solveByGaussResult(regressionMatrix);
+        return spl.solveByGaussRegresi(regressionMatrix);
     }
 
     public void mlrEquation(Matriks solution) {
         System.out.println("Persamaan regresi linear berganda berdasarkan data tersebut adalah sebagai berikut:");
-        System.out.print("f(X) = ");
+        System.out.print("Y = ");
 
         int i, x = 0;
         for (i = solution.getLastIdxCol(); i >= 0; i--) {
@@ -89,7 +89,7 @@ public class Regresi {
                 if (solution.Matriks[0][i] >= 0) {
                     System.out.print(" + " + solution.Matriks[0][i] + " X" + x);
                 } else {
-                    System.out.print(" - " + ((solution.Matriks[0][i])*(-1)) + " X" + x);
+                    System.out.print(" - " + (solution.Matriks[0][i]*(-1)) + " X" + x);
                 }
             }
             x++;

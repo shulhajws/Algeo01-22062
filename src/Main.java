@@ -22,7 +22,7 @@ public class Main {
             choice = in.nextInt();
             System.out.print("Pilih cara input? 1. Keyboard 2. File .txt: ");
             choiceInput = in.nextInt();
-            System.out.print("Pilih cara input? 1. Keyboard 2. File .txt: ");
+            System.out.print("Pilih cara output? 1. Keyboard 2. File .txt: ");
             choiceOutput = in.nextInt();
 
             switch(choice){
@@ -33,7 +33,7 @@ public class Main {
 
                     Matriks M1;
                     if(choiceInput==1){ //Read from Keyboard
-                        System.out.print("Masukkan SPL yang ingin kamu selesaikan dalam bentuk matriks A:");
+                        System.out.println("Masukkan SPL yang ingin kamu selesaikan dalam bentuk matriks A:");
                         System.out.print("Masukkan jumlah baris matriks: ");
                         int nRows = in.nextInt();
                         System.out.print("Masukkan jumlah kolom matriks: ");
@@ -44,7 +44,6 @@ public class Main {
                         System.out.print("Masukkan nilai nilai hasil dalam bentuk matriks b: ");
                         Matriks b = new Matriks(nRows,1);
                         b.readMatriks(nRows, 1);
-
                         M1 = o.concatMatriksSPL(A, b);
                         
                     } else { //Read from File
@@ -59,8 +58,9 @@ public class Main {
                         case 1:
                             if(choiceOutput==1){ //Output to Keyboard
                                 String[] answerSPLbyGauss = spl.solveByGauss(M1);
-                                for(int i=0;i<answerSPLbyGauss.length;i++){
-                                    System.out.println(answerSPLbyGauss[i]);
+                                for(int i=0;i<M1.nCols-1;i++){
+                                    if(answerSPLbyGauss[i]==null){break;}
+                                    System.out.print(answerSPLbyGauss[i]);
                                 }
                             } else { //Output to File
                                 System.out.println("Program ini masih dalam tahap pengembangan");
@@ -69,8 +69,9 @@ public class Main {
                         case 2:
                             if(choiceOutput==1){ //Output to Keyboard
                                 String[] answerSPLbyGaussJordan = spl.solveByGaussJordan(M1);
-                                for(int i=0;i<answerSPLbyGaussJordan.length;i++){
-                                    System.out.println(answerSPLbyGaussJordan[i]);
+                                for(int i=0;i<M1.nCols-1;i++){
+                                    if(answerSPLbyGaussJordan[i]==null){break;}
+                                    System.out.print(answerSPLbyGaussJordan[i]);
                                 }
                             } else { //Output to File
                                 System.out.println("Program ini masih dalam tahap pengembangan");
@@ -79,8 +80,9 @@ public class Main {
                         case 3:
                             if(choiceOutput==1){ //Output to Keyboard
                                 String[] answerSPLbyInvers = spl.solveByInverse(M1);
-                                for(int i=0;i<answerSPLbyInvers.length;i++){
-                                    System.out.println(answerSPLbyInvers[i]);
+                                for(int i=0;i<M1.nCols-1;i++){
+                                    if(answerSPLbyInvers[i]==null){break;}
+                                    System.out.print(answerSPLbyInvers[i]);
                                 }
                             } else { //Output to File
                                 System.out.println("Program ini masih dalam tahap pengembangan");
@@ -94,8 +96,9 @@ public class Main {
                             } else{
                                 if(choiceOutput==1){ //Output to Keyboard
                                     String[] answerSPLbyCramer = spl.Cramer(M1);
-                                    for(int i=0;i<answerSPLbyCramer.length;i++){
-                                        System.out.println(answerSPLbyCramer[i]);
+                                    for(int i=0;i<M1.nCols-1;i++){
+                                        if(answerSPLbyCramer[i]==null){break;}
+                                        System.out.print(answerSPLbyCramer[i]);
                                     }
                                 } else { //Output to File
                                     System.out.println("Program ini masih dalam tahap pengembangan");
@@ -189,12 +192,35 @@ public class Main {
                     }
                     break;
                 case 4: //Interpolasi Polinom
-                    ipol.solveByInterpolasi();
+                    double[] x = new double[999999];
+                    double[] y = new double[999999];
+                    double I = 0; int nt = 0;
+                    if(choiceInput==1){ //Read from Keyboard
+                        System.out.printf("Jumlah titik yang akan dimasukkan: ");
+                        nt = in.nextInt();
+                        for (int i = 0; i < nt; i++){
+                            System.out.printf("Titik " + (i+1) + ":\n");
+                            System.out.printf("--> x" + (i+1) + ", y" + (i+1) +": ");
+                            x[i] = in.nextDouble();
+                            y[i] = in.nextDouble();
+                        }
+                        System.out.printf("Value x yang akan ditaksir: ");
+                        I = in.nextDouble();
+                    } else {//Read from File
+                        System.out.printf("ntar ");
+                    }
+
+                    if(choiceOutput==1){ //Output to Keyboard
+                        ipol.solveByInterpolasi(x, y, I, nt);
+                    } else { //Output to File
+                        System.out.println("Program ini masih dalam tahap pengembangan");
+                    };
+
                     break;
 
                 case 5: //Interpolasi Bicubic Spline
                     Matriks M5;
-                    int xbic,ybic;
+                    double xbic,ybic;
                     if(choiceInput==1){ //Read from Keyboard
                         System.out.println("Masukkan Matriks 4x4 sebagai titik dasar dan titik turunan yang diketahui:");
                         System.out.print("Masukkan nilai nilai matriks: ");
@@ -206,7 +232,7 @@ public class Main {
                         ybic = in.nextInt();
                     } else { //Read from File
                         System.out.println("Masukkan matriks 4x4 beserta titik yang kamu ingin cari nilainya");
-                        System.out.print("Masukkan nama file input dengan forma namafile.txt");
+                        System.out.print("Masukkan nama file input dengan format namafile.txt");
                         String fileNameString = in.nextLine();
                         String filePath = "../lib/"+fileNameString;
                         Matriks M5fromFile = rf.readMatriksFromFile(filePath);
@@ -226,8 +252,32 @@ public class Main {
                     break;
 
                 case 6: //Regresi Linear Berganda
-                    
-                    System.out.println("Program ini masih dalam tahap pengembangan");
+                    Matriks resultReg; int numOfData, numOfVariable;
+                    if(choiceInput==1){ //Input Keyboard
+                        System.out.print("Masukkan jumlah peubah x: ");
+                        numOfVariable = in.nextInt();
+                        System.out.print("Masukkan jumlah data: ");
+                        numOfData = in.nextInt();
+                        Matriks dataMatrix = new Matriks(numOfData, numOfVariable+1);
+                        
+                        resultReg = reg.multipleLinearRegression(numOfVariable, numOfData, dataMatrix);
+                    } else { //Input File
+                        System.out.println("Masukkan nilai nilai regresi linear dalam bentuk matriks");
+                        System.out.print("Masukkan nama file input dengan format namafile.txt");
+                        String fileNameString = in.nextLine();
+                        String filePath = "../lib/"+fileNameString;
+                        Matriks M6fromFile = rf.readMatriksFromFile(filePath);
+                        numOfVariable=(M6fromFile.nCols)-1;
+                        numOfData=(M6fromFile.nRows)-1;
+                        Matriks dataMatrix = new Matriks(numOfData, numOfVariable+1);
+                        resultReg = reg.multipleLinearRegression(numOfVariable, numOfData, dataMatrix);
+                    }
+
+                    if(choiceOutput==1){
+
+                    } else {
+
+                    }
                     break;
                 case 7: //Perbesaran Citra
                     System.out.println("Program ini masih dalam tahap pengembangan");
