@@ -10,7 +10,7 @@ public class WriteToFile {
 
     public PrintStream startWritingToFile (String fileName) throws FileAlreadyExistsException {
         try {
-            PrintStream out = new PrintStream(new FileOutputStream("../lib/" + fileName));
+            PrintStream out = new PrintStream(new FileOutputStream("../lib/outputfile/" + fileName));
             System.setOut(out);
             return out;
         } catch (IOException e) {

@@ -1,4 +1,6 @@
 import mylib.*;
+
+import java.io.PrintStream;
 import java.util.Scanner;
 
 public class Main {
@@ -15,6 +17,7 @@ public class Main {
         Bicubic bic = new Bicubic();
         Regresi reg = new Regresi();
         Util u = new Util();
+        WriteToFile wf = new WriteToFile();
 
         u.welcome();
         while(programOn){
@@ -281,6 +284,13 @@ public class Main {
                         System.out.print("Masukkan jumlah data: ");
                         numOfData = in.nextInt();
                         dataMatrix = new Matriks(numOfData, numOfVariable+1);
+
+                        int i;
+                        System.out.print("y");
+                        for (i = 0; i < numOfVariable; i++) {
+                            System.out.print("|x" + (i+1));
+                        }
+                        System.out.print("\n");
                         dataMatrix.readMatriks(numOfData, numOfVariable+1);
                         
                         resultReg = reg.multipleLinearRegression(numOfVariable, numOfData, dataMatrix);
@@ -305,14 +315,19 @@ public class Main {
                         dataMatrix = rf.getMatriks(M6fromFile);
                         resultReg = reg.multipleLinearRegression(numOfVariable, numOfData, dataMatrix);
                         untukDitaksir = rf.getLastLineMatriks(M6fromFile);
-                        untukDitaksir.displayMatriks();
                     }
 
                     if(choiceOutput==1){
                         reg.mlrEquation(resultReg);
                         reg.mlrEstimation(resultReg,untukDitaksir);
                     } else {
-                        System.out.println("Program ini masih dalam tahap pengembangan");
+                        System.out.print("Masukkan nama file output dengan format namafile.txt: ");
+                        String fileOut = in.nextLine();
+                        PrintStream ps = wf.startWritingToFile(fileOut);
+                        reg.mlrEquation(resultReg);
+                        reg.mlrEstimation(resultReg,untukDitaksir);
+                        wf.stopWritingToFile(fileOut, ps);
+                        System.out.println("Output telah berhasil disimpan dalam file " + fileOut + "!");
                     }
                     break;
                 case 7: //Perbesaran Citra
