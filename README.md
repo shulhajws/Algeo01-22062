@@ -1,18 +1,38 @@
-## Getting Started
+# Kalkulator Matriks
+Solusi untuk Sistem Persamaan Linear, Determinan, Invers, dan Implementasi Matematika lainnya (Interpolasi, Regresi Berganda, Bicubic Spline)
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+## Informasi Umum
+Repositori ini berisi berbagai data yang dibutuhkan untuk Tugas Besar 1 IF2123 Aljabar Linear dan Geometri. Program ini berisi library dengan bahasa Java untuk menyelesaikan berbagai persoalan matriks.
 
-## Folder Structure
+##  Kontributor
+Kontributor project ini adalah:
+1. 13522062 Salsabiila
+2. 13522085 Zahira Dina Amalia
+3. 13522087 Shulha
 
-The workspace contains two folders by default, where:
+## Instalasi dan Konfigurasi Awal
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+Unduh repositori ini dan jalankan pada compiler Anda yang dapat digunakan untuk Java. Jalankan program dan ikuti instruksi agar mendapat jawaban sesuai yang diharapkan
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+Anda dapat melakukannya dengan melakukan _clone_ pada folder yang anda pilih
+```bash
+git clone https://github.com/shulhajws/TubesAlgeoPertama/
+```
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
 
-## Dependency Management
+## Fitur
+1. Menyelesaikan sistem persamaan linear menggunakan Metode Eliminasi Gauss, Metode Eliminasi Gauss-Jordan, Metode Invers, dan Metode Cramer
+2. Menghasilkan invers matriks menggunakan Metode Reduksi Baris dan Metode Adjoint
+3. Menghasilkan determinan matriks menggunakan Metode Ekspansi Kofaktor dan Metode Invers
+4. Menyelesaikan masalah interpolasi polinomial
+5. Menyelesaikan masalah interpolasi bicubic
+6. Menyelesaikan masalah regresi linear ganda
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+## Bahasa yang Digunakan Pada Program
+
+1. Java
+
+##  Kontak
++ Salsabiila - 13522062@std.stei.itb.ac.id
++ Zahira Dina Amalia - 13522085@std.stei.itb.ac.id
++ Shulha - 13522087@std.stei.itb.ac.id 
