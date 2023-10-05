@@ -334,5 +334,22 @@ public class Operations {
         }
         return MCopy;
     }
+    public void toSolve(Matriks m){
+        Operations o = new Operations();
+        for(int b = 1; b < m.nRows; b++){
+            // mendapatkan kolom leading 1
+            int c1 = o.leadingOneCol(m, b);
+            if (c1 < m.nCols){
+                // menjadikan elemen di atas leading 1 nol
+                for(int row = b - 1; row >= 0; row--){
+                    // menyimpan elemen untuk dikalikan dengan leading 1
+                    double x = m.Matriks[row][c1];
+                    for(int k = 0; k < m.nCols; k++){
+                        m.Matriks[row][k] = m.Matriks[row][k] - (x * m.Matriks[b][k]);
+                    }
+                }
+            }
+        }
+    }
 
 }
