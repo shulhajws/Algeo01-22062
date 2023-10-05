@@ -58,7 +58,7 @@ public class SPL {
         int b = m.nRows - 1;
 
         toGauss(m);
-
+        
         if (o.allZeroBefore(m, b)){
             no = true; many = false; one = false;
         } else if (o.oneSolution(m)){
@@ -90,11 +90,11 @@ public class SPL {
                 indeks++;
             }
         } else if (many){
+            o.toSolve(m);
             j = o.manySolution(m, j);
 
         } else if (no){
-            j = null;
-            System.out.println("Tidak ada solusi.\n");
+            j[0] = "Tidak ada solusi.\n";
         }
         return j;
     }
@@ -138,10 +138,10 @@ public class SPL {
                 indeks++;
             }
         } else if (many){
+            o.toSolve(m);
             j = o.manySolution(m, j);
         } else if (no){
-            j = null;
-            System.out.println("Tidak ada solusi.\n");
+            j[0] = "Tidak ada solusi.\n";
         }
         return sol;
     }
@@ -153,8 +153,6 @@ public class SPL {
         Operations o = new Operations();
         
         toGauss(m);
-        m.displayMatriks();
-        System.out.println("\n");
 
         for(int b = 1; b < m.nRows; b++){
             // mendapatkan kolom leading 1
@@ -167,12 +165,8 @@ public class SPL {
                     for(int k = 0; k < m.nCols; k++){
                         m.Matriks[row][k] = m.Matriks[row][k] - (x * m.Matriks[b][k]);
                     }
-                    m.displayMatriks();
-                    System.out.println("akhir\n");
                 }
             }
-            m.displayMatriks();
-            System.out.println("akhir\n");
         }
     }
 
@@ -211,8 +205,7 @@ public class SPL {
             j = o.manySolution(m, j);
 
         } else if (no){
-            j = null;
-            System.out.println("Tidak ada solusi.\n");
+            j[0] = "Tidak ada solusi.\n";
         }
         return j;
     }
@@ -238,7 +231,6 @@ public class SPL {
 
         // Inisialisasi solusi
         String[] j; j = new String[999999];
-        
         Matriks x = new Matriks(1, m.nCols - 1);
         
         // Sesuai kondisi matriks
@@ -253,8 +245,7 @@ public class SPL {
             j = o.manySolution(m, j);
 
         } else if (no){
-            j = null;
-            System.out.println("Tidak ada solusi.\n");
+            j[0] = "Tidak ada solusi.\n";
         }
         return x;
     }
