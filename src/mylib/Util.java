@@ -2,16 +2,7 @@ package mylib;
 
 public class Util {
     /* Prosedur untuk  */
-    // public Matriks createMatriks(){
-    //     Scanner inMat = new Scanner(System.in);
-    //     System.out.print("Masukkan jumlah baris matriks: ");
-    //     int nRows = inMat.nextInt();
-    //     System.out.print("Masukkan jumlah kolom matriks: ");
-    //     int nCols = inMat.nextInt();
-    //     Matriks M = new Matriks(nRows,nCols);
-    //     inMat.close();
-    //     return M;
-    // }
+    
     public void welcome(){
         System.out.println("---------------------KALKULATOR MATRIKS-------------------");
     }

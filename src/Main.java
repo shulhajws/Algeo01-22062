@@ -61,12 +61,12 @@ public class Main {
                         in.nextLine();
                         String fileNameString = in.nextLine();
                         System.out.println(fileNameString);
-                        String filePath = "../lib/testfile/"+fileNameString;
+                        String filePath = "../test/testfile/"+fileNameString;
                         M1 = rf.readMatriksFromFile(filePath);
                     }
 
                     switch(choiceSPL){
-                        case 1:
+                        case 1: //Gauss
                             if(choiceOutput==1){ //Output to Keyboard
                                 String[] answerSPLbyGauss = spl.solveByGauss(M1);
                                 for(int i=0;i<M1.nCols-1;i++){
@@ -86,7 +86,7 @@ public class Main {
                             System.out.println("Output telah berhasil disimpan dalam file " + fileOut + "!");
                             }
                             break;
-                        case 2:
+                        case 2: //Gauss-Jordan
                             if(choiceOutput==1){ //Output to Keyboard
                                 String[] answerSPLbyGaussJordan = spl.solveByGaussJordan(M1);
                                 for(int i=0;i<M1.nCols-1;i++){
@@ -106,7 +106,7 @@ public class Main {
                                 System.out.println("Output telah berhasil disimpan dalam file " + fileOut + "!");
                             }
                             break;
-                        case 3:
+                        case 3: //Invers
                             if(choiceOutput==1){ //Output to Keyboard
                                 String[] answerSPLbyInvers = spl.solveByInverse(M1);
                                 for(int i=0;i<M1.nCols-1;i++){
@@ -175,7 +175,7 @@ public class Main {
                         System.out.print("Masukkan nama file input dengan format namafile.txt: ");
                         in.nextLine();
                         String fileNameString = in.nextLine();
-                        String filePath = "../lib/testfile/"+fileNameString;
+                        String filePath = "../test/testfile/"+fileNameString;
                         M2 = rf.readMatriksFromFile(filePath);
                     };
 
@@ -235,7 +235,7 @@ public class Main {
                         System.out.print("Masukkan nama file input dengan format namafile.txt: ");
                         in.nextLine();
                         String fileNameString = in.nextLine();
-                        String filePath = "../lib/testfile/"+fileNameString;
+                        String filePath = "../test/testfile/"+fileNameString;
                         M3 = rf.readMatriksFromFile(filePath);
                     };
 
@@ -291,7 +291,7 @@ public class Main {
                         System.out.print("Masukkan nama file input dengan format namafile.txt: ");
                         in.nextLine();
                         String fileNameString = in.nextLine();
-                        String filePath = "../lib/testfile/"+ fileNameString;
+                        String filePath = "../test/testfile/"+ fileNameString;
                         Matriks M4 = rf.readMatriksFromFile(filePath);
                         nt=M4.nRows-1;
                         x = rf.getXforIpol(M4);
@@ -330,7 +330,7 @@ public class Main {
                         System.out.print("Masukkan nama file input dengan format namafile.txt: ");
                         in.nextLine();
                         String fileNameString = in.nextLine();
-                        String filePath = "../lib/testfile/" + fileNameString;
+                        String filePath = "../test/testfile/" + fileNameString;
                         Matriks M5fromFile = rf.readMatriksFromFile(filePath);
                         M5 = rf.getMatriks(M5fromFile);
                         Matriks M5Titik = rf.getXYUntukDitebak(M5);
@@ -341,7 +341,7 @@ public class Main {
                     if(choiceOutput==1){//Output to Keyboard
                         System.out.print("Hasil dari petaan bicubic spline nya adalah ");
                         double result = bic.bicubicResult(M5, xbic, ybic);
-                        System.out.print(result);
+                        System.out.print(String.format("%.3f", result));
                         System.out.print("\n");
                     } else { //Output to File
                         System.out.print("Masukkan nama file output dengan format namafile.txt: ");
@@ -349,7 +349,7 @@ public class Main {
                         PrintStream ps = wf.startWritingToFile(fileOut);
                         System.out.print("Hasil dari petaan bicubic spline nya adalah ");
                         double result = bic.bicubicResult(M5, xbic, ybic);
-                        System.out.print(result);
+                        System.out.print(String.format("%.3f", result));
                         System.out.print("\n");
                         wf.stopWritingToFile(fileOut, ps);
                         System.out.println("Output telah berhasil disimpan dalam file " + fileOut + "!");
@@ -387,7 +387,7 @@ public class Main {
                         System.out.print("Masukkan nama file input dengan format namafile.txt: ");
                         in.nextLine();
                         String fileNameString = in.nextLine();
-                        String filePath = "../lib/testfile/" + fileNameString;
+                        String filePath = "../test/testfile/" + fileNameString;
                         Matriks M6fromFile = rf.readMatriksFromFile(filePath);
                         numOfVariable=(M6fromFile.nCols)-1;
                         numOfData=(M6fromFile.nRows)-1;

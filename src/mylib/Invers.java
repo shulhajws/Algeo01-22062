@@ -61,7 +61,7 @@ public class Invers {
                 }
             }
         } else {
-            System.out.println("Tidak memilikin matriks balikan!\n");
+            System.out.println("Tidak memilikin matriks balikan!");
             balikan = m.copyMatriks();
         }
         return balikan;

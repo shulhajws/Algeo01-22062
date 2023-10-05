@@ -250,7 +250,6 @@ public class SPL {
         return x;
     }
 
-    
 
 // 3. Metode Matriks Balikan
     /* Prosedur untuk mengubah matriks yang diberikan hingga terbentuk matriks Gauss-Jordan (eselon baris tereduksi) */

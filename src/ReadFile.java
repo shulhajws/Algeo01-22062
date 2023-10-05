@@ -33,7 +33,6 @@ public class ReadFile {
                 }
             }
             fReader.close();
-            // M.displayMatriks();
             return M;
           } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
@@ -77,11 +76,6 @@ public class ReadFile {
             Mat[i]=M.Matriks[i][0];
         }
         return Mat;
-        // Matriks Mat = new Matriks(M.nRows-1,1);
-        // for(int i=0;i<Mat.nRows;i++){
-        //     Mat.Matriks[i][0]=M.Matriks[i][0];
-        // }
-        // return Mat;
     }
 
     public double[] getYforIpol(Matriks M){
@@ -90,12 +84,5 @@ public class ReadFile {
             Mat[i]=M.Matriks[i][1];
         }
         return Mat;
-        // Matriks Mat = new Matriks(M.nRows-1,1);
-        // for(int i=0;i<Mat.nRows;i++){
-        //     Mat.Matriks[i][0]=M.Matriks[i][1];
-        // }
-        // return Mat;
     }
-
-    
 }

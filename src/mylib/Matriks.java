@@ -1,6 +1,5 @@
 package mylib;
 import java.util.Scanner;
-// import mylib.AljabarLinear;
 
 public class Matriks {
     //Atribut
@@ -41,7 +40,7 @@ public class Matriks {
         int i,j;
         for(i=0;i<this.nRows;i++){
             for(j=0;j<this.nCols;j++){
-                System.out.print(this.Matriks[i][j] + " ");
+                System.out.print(String.format("%.3f", this.Matriks[i][j]) + " ");
             }
             System.out.println();
         }

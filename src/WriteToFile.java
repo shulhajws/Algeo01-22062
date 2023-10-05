@@ -10,11 +10,11 @@ public class WriteToFile {
 
     public PrintStream startWritingToFile (String fileName) throws FileAlreadyExistsException {
         try {
-            PrintStream out = new PrintStream(new FileOutputStream("../lib/outputfile/" + fileName));
+            PrintStream out = new PrintStream(new FileOutputStream("../test/outputfile/" + fileName));
             System.setOut(out);
             return out;
         } catch (IOException e) {
-            System.out.println("Error during reading/writing");
+            System.out.println("Terdapat error pada saat proses pembacaan/penulisan ke file");
             e.printStackTrace();
             return null;
         }

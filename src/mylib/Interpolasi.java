@@ -2,33 +2,7 @@ package mylib;
 
 public class Interpolasi {
     public void solveByInterpolasi(double[] x, double[] y, double I, int nt){
-        // Scanner in = new Scanner(System.in);
-        // BufferedReader file = new BufferedReader(new InputStreamReader(System.in));
         SPL spl = new SPL();
-        // double[] x = new double[999999];
-        // double[] y = new double[999999];
-        // double I = 0;
-        // int nt = 0;
-
-        // System.out.printf("Pilih format masukan:\n1. Keyboard\n2. File");
-        // int masukan = in.nextInt();
-        // while(masukan != 1 && masukan != 2){
-        //     System.out.printf("Mohon ulangi masukan! Format masukan:\n1. Keyboard\n2. File");
-        //     masukan = in.nextInt();
-        // }
-
-        // if (masukan == 1){
-        //     System.out.printf("Jumlah titik yang akan dimasukkan: ");
-        //     nt = in.nextInt();
-        //     for (int i = 0; i < nt; i++){
-        //         System.out.printf("Titik " + (i+1) + ":\n");
-        //         System.out.printf("--> x" + (i+1) + ": ");
-        //         x[i] = in.nextDouble();
-        //         System.out.printf("--> y" + (i+1) + ": ");
-        //         y[i] = in.nextDouble();
-        //     }
-        //     System.out.printf("Value x yang akan ditaksir: ");
-        //     I = in.nextDouble();
     
         Matriks m = new Matriks(nt, nt + 1);
         // Matriks mj = new Matriks(1, nt + 1);
@@ -50,12 +24,12 @@ public class Interpolasi {
         int i, a = 0;
         for (i = mj.getLastIdxCol(); i >= 0; i--) {
             if (i == mj.getLastIdxCol()) {
-                System.out.print(mj.Matriks[0][i]);
+                System.out.print(String.format("%.3f", mj.Matriks[0][i]));
             } else {
                 if (mj.Matriks[0][i] >= 0) {
-                    System.out.print(" + " + mj.Matriks[0][i] + " X" + a);
+                    System.out.print(" + " + String.format("%.3f", mj.Matriks[0][i]) + " X^" + a);
                 } else {
-                    System.out.print(" - " + (mj.Matriks[0][i]*(-1)) + " X" + a);
+                    System.out.print(" - " + String.format("%.3f", (mj.Matriks[0][i]*(-1))) + " X^" + a);
                 }
             }
             a++;
@@ -69,8 +43,6 @@ public class Interpolasi {
             hasil += mj.Matriks[0][i] * Math.pow(I, p);
             p += 1;
         }
-        System.out.printf("Hasil: " + hasil);
-        
-        // in.close();
+        System.out.printf("Hasil: " + String.format("%.3f", hasil));
     }
 }
