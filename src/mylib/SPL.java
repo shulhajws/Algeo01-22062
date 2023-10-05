@@ -29,7 +29,8 @@ public class SPL {
             for (int under = b + 1; under < m.nRows; under++) {
                 toZero = m.Matriks[under][k];
                 o.convertZero(toZero, b, under, m);
-            }      
+            } 
+                
         }
         // swap row
         int swap; int row = 0;
@@ -83,8 +84,10 @@ public class SPL {
                 x[assign] = elmt;
                 assign += 1;
             }
-            for(int r = 0; r < m.nCols - 1; r++){
-                j[r] = "x" + Integer.toString(r+1) + " = " + Double.toString(x[r]) + "\n";
+            int indeks = 0;
+            for(int r = m.nCols - 2; r >= 0; r--){
+                j[indeks] = "x" + Integer.toString(indeks + 1) + " = " + Double.toString((x[r])) + "\n";
+                indeks++;
             }
         } else if (many){
             j = o.manySolution(m, j);
@@ -129,9 +132,10 @@ public class SPL {
                 sol.Matriks[0][assign] = x;
                 assign += 1;
             }
-            
-            for(int r = 0; r < m.nCols - 1; r++){
-                j[r] = "x" + Integer.toString(r+1) + " = " + Double.toString(sol.Matriks[0][r]) + "\n";
+            int indeks = 0;
+            for(int r = m.nCols - 2; r >= 0; r--){
+                j[indeks] = "x" + Integer.toString(indeks + 1) + " = " + Double.toString((sol.Matriks[0][r])) + "\n";
+                indeks++;
             }
         } else if (many){
             j = o.manySolution(m, j);
@@ -149,19 +153,26 @@ public class SPL {
         Operations o = new Operations();
         
         toGauss(m);
+        m.displayMatriks();
+        System.out.println("\n");
 
         for(int b = 1; b < m.nRows; b++){
             // mendapatkan kolom leading 1
             int c1 = o.leadingOneCol(m, b);
-
-            // menjadikan elemen di atas leading 1 nol
-            for(int row = b - 1; row >= 0; row--){
-                // menyimpan elemen untuk dikalikan dengan leading 1
-                double x = m.Matriks[row][c1];
-                for(int k = 0; k < m.nCols; k++){
-                    m.Matriks[row][k] = m.Matriks[row][k] - (x * m.Matriks[b][k]);
+            if (c1 < m.nCols){
+                // menjadikan elemen di atas leading 1 nol
+                for(int row = b - 1; row >= 0; row--){
+                    // menyimpan elemen untuk dikalikan dengan leading 1
+                    double x = m.Matriks[row][c1];
+                    for(int k = 0; k < m.nCols; k++){
+                        m.Matriks[row][k] = m.Matriks[row][k] - (x * m.Matriks[b][k]);
+                    }
+                    m.displayMatriks();
+                    System.out.println("akhir\n");
                 }
             }
+            m.displayMatriks();
+            System.out.println("akhir\n");
         }
     }
 
@@ -274,11 +285,18 @@ public class SPL {
             for(int b = 0; b < m.nRows; b++){
                 B.Matriks[b][0] = m.Matriks[b][cols];
             }
+            Matriks a = new Matriks(rows + 1, rows + 1);
+            for(int b = 0; b < m.nRows; b++){
+                for(int k = 0; k < cols; k++){
+                    a.Matriks[b][k] = A.Matriks[b][k];
+                }
+            }
+
             if (!o.inversible(A)){
                 System.out.println("Tidak bisa dipecahkan dengan metode matriks balikan!\n");
             } else {
                 Matriks Ai;
-                Ai = invers.inversByGaussJordan(A);
+                Ai = invers.inversByGaussJordan(a);
                 Matriks hasil = new Matriks(rows + 1, 1);
                 for(int b = 0; b < Ai.nRows; b++){
                     for(int k = 0; k < Ai.nCols; k++){
@@ -349,4 +367,3 @@ public class SPL {
         }
     }
 }
-
