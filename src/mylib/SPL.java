@@ -72,7 +72,7 @@ public class SPL {
         double[] x; x = new double[999999];
         String[] j; j = new String[999999];
         
-        if (one){
+        if (one & (m.nRows <= m.nCols)){
             int assign = 0;
             for(int i = m.nRows - 1; i >= 0; i--){
                 double elmt = m.Matriks[i][m.nCols - 1];
@@ -94,6 +94,8 @@ public class SPL {
             j = o.manySolution(m, j);
 
         } else if (no){
+            j[0] = "Tidak ada solusi.\n";
+        } else {
             j[0] = "Tidak ada solusi.\n";
         }
         return j;
