@@ -74,7 +74,16 @@ public class Main {
                                     System.out.print(answerSPLbyGauss[i]);
                                 }
                             } else { //Output to File
-                                System.out.println("Program ini masih dalam tahap pengembangan");
+                                System.out.print("Masukkan nama file output dengan format namafile.txt: ");
+                            String fileOut = in.nextLine();
+                            PrintStream ps = wf.startWritingToFile(fileOut);
+                            String[] answerSPLbyGauss = spl.solveByGauss(M1);
+                            for(int i=0;i<M1.nCols-1;i++){
+                                if(answerSPLbyGauss[i]==null){break;}
+                                System.out.print(answerSPLbyGauss[i]);
+                            }
+                            wf.stopWritingToFile(fileOut, ps);
+                            System.out.println("Output telah berhasil disimpan dalam file " + fileOut + "!");
                             }
                             break;
                         case 2:
@@ -85,7 +94,16 @@ public class Main {
                                     System.out.print(answerSPLbyGaussJordan[i]);
                                 }
                             } else { //Output to File
-                                System.out.println("Program ini masih dalam tahap pengembangan");
+                                System.out.print("Masukkan nama file output dengan format namafile.txt: ");
+                                String fileOut = in.nextLine();
+                                PrintStream ps = wf.startWritingToFile(fileOut);
+                                String[] answerSPLbyGaussJordan = spl.solveByGaussJordan(M1);
+                                for(int i=0;i<M1.nCols-1;i++){
+                                    if(answerSPLbyGaussJordan[i]==null){break;}
+                                    System.out.print(answerSPLbyGaussJordan[i]);
+                                }
+                                wf.stopWritingToFile(fileOut, ps);
+                                System.out.println("Output telah berhasil disimpan dalam file " + fileOut + "!");
                             }
                             break;
                         case 3:
@@ -96,7 +114,17 @@ public class Main {
                                     System.out.print(answerSPLbyInvers[i]);
                                 }
                             } else { //Output to File
-                                System.out.println("Program ini masih dalam tahap pengembangan");
+                                System.out.print("Masukkan nama file output dengan format namafile.txt: ");
+                                String fileOut = in.nextLine();
+                                PrintStream ps = wf.startWritingToFile(fileOut);
+                                String[] answerSPLbyInvers = spl.solveByInverse(M1);
+                                for(int i=0;i<M1.nCols-1;i++){
+                                    if(answerSPLbyInvers[i]==null){break;}
+                                    System.out.print(answerSPLbyInvers[i]);
+                                }
+                                wf.stopWritingToFile(fileOut, ps);
+                                System.out.println("Output telah berhasil disimpan dalam file " + fileOut + "!");
+
                             }
                             break;
                         case 4: //Kaidah Cramer
@@ -112,7 +140,17 @@ public class Main {
                                         System.out.print(answerSPLbyCramer[i]);
                                     }
                                 } else { //Output to File
-                                    System.out.println("Program ini masih dalam tahap pengembangan");
+                                    System.out.print("Masukkan nama file output dengan format namafile.txt: ");
+                                    String fileOut = in.nextLine();
+                                    PrintStream ps = wf.startWritingToFile(fileOut);
+                                    String[] answerSPLbyCramer = spl.Cramer(M1);
+                                    for(int i=0;i<M1.nCols-1;i++){
+                                        if(answerSPLbyCramer[i]==null){break;}
+                                        System.out.print(answerSPLbyCramer[i]);
+                                    }
+                                    wf.stopWritingToFile(fileOut, ps);
+                                    System.out.println("Output telah berhasil disimpan dalam file " + fileOut + "!");
+
                                 }
                             }
                             break;
@@ -147,17 +185,33 @@ public class Main {
                     } else {
                         switch(choiceDet){
                             case 1: //Reduksi Baris
-                                if(choiceOutput==1){ //Output to Keyboard
+                                if(choiceOutput==1){ //Output to Console
                                     System.out.println("Determinan matriks anda adalah: ");
                                     System.out.println(det.determinantByRowReduction(M2));
                                 } else { //Output to File
-                                    System.out.println("Program ini masih dalam tahap pengembangan");
-                                };
+                                    System.out.print("Masukkan nama file output dengan format namafile.txt: ");
+                                    String fileOut = in.nextLine();
+                                    PrintStream ps = wf.startWritingToFile(fileOut);
+                                    System.out.println("Determinan matriks anda adalah: ");
+                                    System.out.println(det.determinantByRowReduction(M2));
+                                    wf.stopWritingToFile(fileOut, ps);
+                                    System.out.println("Output telah berhasil disimpan dalam file " + fileOut + "!");
+                                }
                                 break;
                             case 2: //Ekspansi Kofaktor
                                 // ----------------------
-                                System.out.println("Determinan matriks anda adalah: ");
-                                System.out.println(det.determinantByCofactor(M2));
+                                if(choiceOutput==1){ //Output to Console
+                                    System.out.println("Determinan matriks anda adalah: ");
+                                    System.out.println(det.determinantByCofactor(M2));
+                                } else { //Output to File
+                                    System.out.print("Masukkan nama file output dengan format namafile.txt: ");
+                                    String fileOut = in.nextLine();
+                                    PrintStream ps = wf.startWritingToFile(fileOut);
+                                    System.out.println("Determinan matriks anda adalah: ");
+                                    System.out.println(det.determinantByCofactor(M2));
+                                    wf.stopWritingToFile(fileOut, ps);
+                                    System.out.println("Output telah berhasil disimpan dalam file " + fileOut + "!");
+                                }
                                 break;
                         }
                         break;
@@ -191,15 +245,28 @@ public class Main {
                                 System.out.println("Invers matriks anda adalah: ");
                                 (inv.inversByGaussJordan(M3)).displayMatriks();
                             } else { //Output to File
-                                System.out.println("Program ini masih dalam tahap pengembangan");
-                            };
+                                System.out.print("Masukkan nama file output dengan format namafile.txt: ");
+                                String fileOut = in.nextLine();
+                                PrintStream ps = wf.startWritingToFile(fileOut);
+                                System.out.println("Invers matriks anda adalah: ");
+                                (inv.inversByGaussJordan(M3)).displayMatriks();
+                                wf.stopWritingToFile(fileOut, ps);
+                                System.out.println("Output telah berhasil disimpan dalam file " + fileOut + "!");
+                            }
                             break;
                         case 2: //Adjoin
                             if(choiceOutput==1){ //Output to Keyboard
                                 System.out.println("Invers matriks anda adalah: ");
                                 (inv.inversMatriks(M3)).displayMatriks();
                             } else { //Output to File
-                                System.out.println("Program ini masih dalam tahap pengembangan");
+                                System.out.print("Masukkan nama file output dengan format namafile.txt: ");
+                                String fileOut = in.nextLine();
+                                PrintStream ps = wf.startWritingToFile(fileOut);
+                                System.out.println("Invers matriks anda adalah: ");
+                                (inv.inversMatriks(M3)).displayMatriks();
+                                wf.stopWritingToFile(fileOut, ps);
+                                System.out.println("Output telah berhasil disimpan dalam file " + fileOut + "!");
+
                             };
                             break;
                     }
@@ -236,9 +303,14 @@ public class Main {
                         ipol.solveByInterpolasi(x, y, I, nt);
                         System.out.println();
                     } else { //Output to File
-                        System.out.println("Program ini masih dalam tahap pengembangan");
-                    };
-
+                        System.out.print("Masukkan nama file output dengan format namafile.txt: ");
+                        String fileOut = in.nextLine();
+                        PrintStream ps = wf.startWritingToFile(fileOut);
+                        ipol.solveByInterpolasi(x, y, I, nt);
+                        System.out.println();
+                        wf.stopWritingToFile(fileOut, ps);
+                        System.out.println("Output telah berhasil disimpan dalam file " + fileOut + "!");
+                    }
                     break;
 
                 case 5: //Interpolasi Bicubic Spline
@@ -272,7 +344,15 @@ public class Main {
                         System.out.print(result);
                         System.out.print("\n");
                     } else { //Output to File
-                        System.out.println("Program ini masih dalam tahap pengembangan");
+                        System.out.print("Masukkan nama file output dengan format namafile.txt: ");
+                        String fileOut = in.nextLine();
+                        PrintStream ps = wf.startWritingToFile(fileOut);
+                        System.out.print("Hasil dari petaan bicubic spline nya adalah ");
+                        double result = bic.bicubicResult(M5, xbic, ybic);
+                        System.out.print(result);
+                        System.out.print("\n");
+                        wf.stopWritingToFile(fileOut, ps);
+                        System.out.println("Output telah berhasil disimpan dalam file " + fileOut + "!");
                     }
                     break;
 
@@ -331,7 +411,12 @@ public class Main {
                     }
                     break;
                 case 7: //Perbesaran Citra
-                    System.out.println("Program ini masih dalam tahap pengembangan");
+                    System.out.println("Kak maaf kami gak selesai-selesai ngerjain perbesaran citranya :c");
+                    System.out.println("Daripada kosong doang gitu mending kami gombalin kakak xixixi~");
+                    System.out.println("Kak tau gak kesamaan cinta kami sama perbesaran citra tubes algeo??");
+                    System.out.println("Sama-sama gak akan pernah selesai alias unendinggg *ba dum tsssss*");
+                    u.displayOurLove();
+                    System.out.println("P.S. Kak maaf banget tapi kita udah ada effort kok tolong at least cek citra.java ya plssss makasihh");
                     break;
             }
         }
