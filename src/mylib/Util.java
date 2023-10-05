@@ -1,5 +1,4 @@
 package mylib;
-import java.util.Scanner;
 
 public class Util {
     /* Prosedur untuk  */
