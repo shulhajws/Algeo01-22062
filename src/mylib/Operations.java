@@ -275,7 +275,7 @@ public class Operations {
         }
         return yes;
     }
-
+    
     public String[] manySolution(Matriks m, String[] j){
         boolean[] proses = new boolean[m.nCols - 1];
         char[] variabel = new char[m.nCols - 1];
