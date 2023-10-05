@@ -10,15 +10,16 @@ public class ReadFile {
             File text = new File(filePath);
             Scanner fReader = new Scanner(text);
             int nRows=0, nCols=0;
+            boolean countCol=true;
             while (fReader.hasNextLine()) {
               nRows++;
               Scanner colReader = new Scanner(fReader.nextLine());
-              while (colReader.hasNextDouble()){
+              while (countCol && colReader.hasNextDouble()){
                   nCols++;
                   colReader.nextDouble();              
               }
+              countCol=false;
             }
-            nCols = nCols/nRows;
             Matriks M = new Matriks(nRows,nCols);
             fReader.close();
 

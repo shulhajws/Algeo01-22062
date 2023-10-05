@@ -14,15 +14,21 @@ public class Main {
         Interpolasi ipol = new Interpolasi();
         Bicubic bic = new Bicubic();
         Regresi reg = new Regresi();
+        Util u = new Util();
 
+        u.welcome();
         while(programOn){
-            Util u = new Util();
             u.displayMenu();
             System.out.print("Operasi apa yang ingin kamu lakukan? (Masukkan pilihan menu dalam angka): ");
             choice = in.nextInt();
+            if(choice==8){
+                u.bye();
+                programOn = false;
+                break;
+            }
             System.out.print("Pilih cara input? 1. Keyboard 2. File .txt: ");
             choiceInput = in.nextInt();
-            System.out.print("Pilih cara output? 1. Keyboard 2. File .txt: ");
+            System.out.print("Pilih cara output? 1. Console 2. File .txt: ");
             choiceOutput = in.nextInt();
 
             switch(choice){
@@ -116,7 +122,7 @@ public class Main {
 
                    Matriks M2;
                     if(choiceInput==1){ //Read from Keyboard
-                        System.out.print("Masukkan Matriks yang ingin kamu cari determinannya:");
+                        System.out.println("Masukkan Matriks yang ingin kamu cari determinannya:");
                         System.out.print("Masukkan nilai n (jumlah baris dan kolom harus sama agar memiliki determinan): ");
                         int nRows = in.nextInt();
                         int nCols = nRows;
@@ -124,8 +130,8 @@ public class Main {
                         M2 = new Matriks(nRows,nCols);
                         M2.readMatriks(nRows, nCols);
                     } else { //Read from File
-                        System.out.print("Masukkan matriks yang kamu ingin cari determinannya");
-                        System.out.print("Masukkan nama file input dengan forma namafile.txt");
+                        System.out.println("Masukkan matriks yang kamu ingin cari determinannya");
+                        System.out.print("Masukkan nama file input dengan format namafile.txt: ");
                         in.nextLine();
                         String fileNameString = in.nextLine();
                         String filePath = "../lib/testfile/"+fileNameString;
@@ -133,7 +139,7 @@ public class Main {
                     };
 
                     if (!M2.isMatrixSquare()) {
-                        System.out.print("Matriks bukan merupakan matriks persegi. Determinan tidak dapat dihitung.");
+                        System.out.println("Matriks bukan merupakan matriks persegi. Determinan tidak dapat dihitung.");
                         break;
                     } else {
                         switch(choiceDet){
@@ -169,7 +175,7 @@ public class Main {
                         M3.readMatriks(nRows, nCols);
                     } else { //Read from File
                         System.out.println("Masukkan matriks yang kamu ingin cari inversnya");
-                        System.out.print("Masukkan nama file input dengan format namafile.txt");
+                        System.out.print("Masukkan nama file input dengan format namafile.txt: ");
                         in.nextLine();
                         String fileNameString = in.nextLine();
                         String filePath = "../lib/testfile/"+fileNameString;
@@ -211,8 +217,8 @@ public class Main {
                         System.out.printf("Value x yang akan ditaksir: ");
                         I = in.nextDouble();
                     } else {//Read from File
-                        System.out.print("Masukkan file text dengan format beberapa titik x y dan nilai yang akan ditaksir");
-                        System.out.print("Masukkan nama file input dengan format namafile.txt");
+                        System.out.println("Masukkan file text dengan format beberapa titik x y dan nilai yang akan ditaksir");
+                        System.out.print("Masukkan nama file input dengan format namafile.txt: ");
                         in.nextLine();
                         String fileNameString = in.nextLine();
                         String filePath = "../lib/testfile/"+ fileNameString;
@@ -246,7 +252,7 @@ public class Main {
                         ybic = in.nextDouble();
                     } else { //Read from File
                         System.out.println("Masukkan matriks 4x4 beserta titik yang kamu ingin cari nilainya");
-                        System.out.print("Masukkan nama file input dengan format namafile.txt");
+                        System.out.print("Masukkan nama file input dengan format namafile.txt: ");
                         in.nextLine();
                         String fileNameString = in.nextLine();
                         String filePath = "../lib/testfile/" + fileNameString;
@@ -306,14 +312,11 @@ public class Main {
                         reg.mlrEquation(resultReg);
                         reg.mlrEstimation(resultReg,untukDitaksir);
                     } else {
-
+                        System.out.println("Program ini masih dalam tahap pengembangan");
                     }
                     break;
                 case 7: //Perbesaran Citra
                     System.out.println("Program ini masih dalam tahap pengembangan");
-                    break;
-                case 8:
-                    programOn = false;
                     break;
             }
         }

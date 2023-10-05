@@ -13,7 +13,12 @@ public class Util {
     //     inMat.close();
     //     return M;
     // }
-
+    public void welcome(){
+        System.out.println("---------------------KALKULATOR MATRIKS-------------------");
+    }
+    public void bye(){
+        System.out.println("---------------------TERIMA KASIH-------------------");
+    }
     public void displayMenu(){
         System.out.println("Selamat datang di program pemanfaatan operasi matriks!");
         System.out.println("---------------------MENU-------------------");
