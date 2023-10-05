@@ -51,6 +51,21 @@ public class Util {
         System.out.println("2. Metode Adjoin");
     }
 
+    public Matriks matriksHilbert(int n){
+        Matriks h = new Matriks(n, n + 1);
+        for (int b = 0 ; b < n ; b++){
+            for (int k = 0 ; k < n ; k++){
+                h.Matriks[b][k] = 1/ (b + k + 1);
+            }
+        }
+        for (int b = 0 ; b < n ; b++){
+            if (b == 0){
+                h.Matriks[b][n] = 1;
+            } else {
+                h.Matriks[b][n] = 0;
+            }
+        }
+        return h;
+    }
 
-    
 }
