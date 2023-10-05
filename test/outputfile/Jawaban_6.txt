@@ -1,0 +1,4 @@
+Persamaan regresi linear berganda berdasarkan data tersebut adalah sebagai berikut:
+f(X) = -3.508 - 0.003 X1 + 0.001 X2 + 0.154 X3
+Estimasi nilai variabel terikat berdasarkan regresi linear berganda adalah: 
+0.938

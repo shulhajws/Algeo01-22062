@@ -60,7 +60,6 @@ public class Main {
                         System.out.print("Masukkan nama file input dengan format namafile.txt: ");
                         in.nextLine();
                         String fileNameString = in.nextLine();
-                        System.out.println(fileNameString);
                         String filePath = "../test/testfile/"+fileNameString;
                         M1 = rf.readMatriksFromFile(filePath);
                     }
@@ -131,7 +130,16 @@ public class Main {
                             System.out.println("Perlu diingat bahsa kaidah Cramer khusus untuk SPL dengan n peubah dan n persamaan!");
                             
                             if(M1.nCols!=M1.nRows+1){ //Jika tidak dapat cramer
-                                System.out.println("Tidak dapat diselesaikan dengan Kaidah Cramer");
+                                if(choiceOutput==1){
+                                    System.out.println("Tidak dapat diselesaikan dengan Kaidah Cramer");
+                                } else {
+                                    System.out.print("Masukkan nama file output dengan format namafile.txt: ");
+                                    String fileOut = in.nextLine();
+                                    PrintStream ps = wf.startWritingToFile(fileOut);
+                                    System.out.println("Tidak dapat diselesaikan dengan Kaidah Cramer");
+                                    wf.stopWritingToFile(fileOut, ps);
+                                    System.out.println("Output telah berhasil disimpan dalam file " + fileOut + "!");
+                                }
                             } else{
                                 if(choiceOutput==1){ //Output to Keyboard
                                     String[] answerSPLbyCramer = spl.Cramer(M1);
@@ -333,7 +341,7 @@ public class Main {
                         String filePath = "../test/testfile/" + fileNameString;
                         Matriks M5fromFile = rf.readMatriksFromFile(filePath);
                         M5 = rf.getMatriks(M5fromFile);
-                        Matriks M5Titik = rf.getXYUntukDitebak(M5);
+                        Matriks M5Titik = rf.getXYUntukDitebak(M5fromFile);
                         xbic = M5Titik.Matriks[0][0];
                         ybic = M5Titik.Matriks[0][1];
                     };
@@ -383,7 +391,7 @@ public class Main {
                             p++;
                         }
                     } else { //Input File
-                        System.out.println("Masukkan nilai nilai regresi linear dalam bentuk matriks");
+                        System.out.println("Masukkan nilai nilai regresi linear dalam bentuk matriks dengan format kolom f(X)|X1|X2|...|Xn");
                         System.out.print("Masukkan nama file input dengan format namafile.txt: ");
                         in.nextLine();
                         String fileNameString = in.nextLine();

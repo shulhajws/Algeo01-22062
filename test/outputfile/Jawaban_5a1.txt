@@ -1,0 +1,3 @@
+Persamaan polinom interpolasi berdasarkan data tersebut adalah sebagai berikut:
+f(X) = -0.023 + 0.240 X^1 + 0.197 X^2 + 0.000 X^3 + 0.026 X^4 + 0.000 X^5 - 0.000 X^6
+Hasil: 0.033
