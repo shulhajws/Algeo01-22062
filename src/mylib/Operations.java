@@ -306,7 +306,11 @@ public class Operations {
                             }    
                         }
                     }
-                    j[c] = "x" + Integer.toString(c+1) + " = " + temp + "\n";
+                    if (temp == ""){
+                        j[c] = "x" + Integer.toString(c+1) + " = " + 0 + "\n";
+                    } else {
+                        j[c] = "x" + Integer.toString(c+1) + " = " + temp + "\n";
+                    }
                     break;
                 } else {
                     if(!proses[c]){
